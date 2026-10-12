@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F5A623">
+<title>Bolo Bill</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%22422.04%20498.50%20491.76%20491.76%22%3E%3Cpath%20fill%3D%22%23F5A623%22%20fill-rule%3D%22evenodd%22%20d%3D%22M434.04%20744.38a233.88%20233.88%200%201%200%20467.76%200a233.88%20233.88%200%201%200%20-467.76%200zM622.20%20588.56L823.80%20588.56L715.08%20666.44L513.48%20666.44zM511.08%20682.04L712.68%20682.04L824.76%20806.84L623.16%20806.84zM620.76%20822.44L822.36%20822.44L713.64%20900.32L512.04%20900.32z%22/%3E%3C/svg%3E">
+<style>
+:root{--acc:#F5A623;--on:#1B2027;--g:#8A5600;--g2:#FEF6E9;--g3:#FBDDA7;--ink:#1B2027;--mut:#5D6772;--line:#E2E6EA;--bg:#F4F6F8;--field:#CFD5DB;--soft:#EEF1F4;--red:#C0392B;--red2:#FDEDEB;--amber:#FFF4DC}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI","Noto Sans","Noto Sans Devanagari","Noto Sans Gujarati",sans-serif;font-size:17px;padding-bottom:86px}
+header{background:var(--acc);color:var(--on);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;position:sticky;top:0;z-index:5}
+.hl{display:flex;align-items:center;gap:11px;min-width:0}.logo{width:44px;height:44px;flex:none;display:block}
+.foot{text-align:center;padding:18px 12px 8px;font-size:13px;color:var(--mut)}.foot a{display:inline-flex;align-items:center;gap:7px;color:var(--g);font-weight:700;text-decoration:none;padding:8px 12px;border-radius:999px}.foot a:active{background:var(--g2)}.foot svg{width:20px;height:20px}
+.brand{font-size:20px;font-weight:800;line-height:1.2}.sub{font-size:13px;opacity:.8;margin-top:2px}
+button,select,input,textarea{font:inherit;color:inherit}
+button{border:0;border-radius:12px;padding:12px 14px;font-weight:700;cursor:pointer;background:var(--soft);color:var(--ink)}
+.lang{background:#fff;color:var(--on);padding:9px 12px;white-space:nowrap;font-size:15px}
+main{max-width:720px;margin:0 auto;padding:12px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-top:12px}
+.panel h2{font-size:17px;margin:0 0 10px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px}.stat small{color:var(--mut);font-size:13px;display:block}.stat strong{font-size:22px}
+.voice{text-align:center}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+.chips.center{justify-content:center}
+.chip{flex:none;background:var(--soft);border:1px solid var(--line);border-radius:999px;padding:10px 15px;font-weight:700;font-size:15px;color:var(--ink)}
+.chip.on{background:var(--acc);color:var(--on);border-color:var(--acc)}
+.mic{width:100px;height:100px;border-radius:50%;background:var(--acc);color:var(--on);font-size:42px;margin:14px auto 6px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px #C77A0040;padding:0}
+.mic.live{background:#c0392b;animation:pulse 1.2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 #c0392b77}70%{box-shadow:0 0 0 20px #c0392b00}100%{box-shadow:0 0 0 0 #c0392b00}}
+.status{min-height:22px;font-size:14px;color:var(--mut);margin:4px 0 10px;line-height:1.45}
+.vrow{display:flex;gap:8px;align-items:stretch}.vrow textarea{flex:1;min-height:54px;border:1px solid var(--field);border-radius:12px;padding:10px;resize:vertical;font-size:16px;background:#fff}
+.vrow button{background:var(--acc);color:var(--on)}
+.hint{font-size:13px;color:var(--mut);line-height:1.5;margin-top:10px;text-align:left}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.tile{background:#F8F9FA;border:1px solid var(--line);padding:8px 4px;min-height:86px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:14px;color:var(--ink);line-height:1.2}
+.tile .ic{font-size:26px}.tile small{color:var(--mut);font-weight:600;font-size:12px}
+.tile:active{background:var(--g2)}
+@media(min-width:560px){.tiles{grid-template-columns:repeat(4,1fr)}}
+label.l{display:block;font-size:13px;font-weight:700;color:var(--mut);margin:0 0 5px}
+select,input{width:100%;min-height:46px;border:1px solid var(--field);border-radius:10px;padding:8px 10px;background:#fff}
+input:focus,select:focus,textarea:focus{outline:2px solid #F8C36A;border-color:var(--g)}
+.warn{border-color:#E8A33A!important;background:var(--amber)!important}
+.drow{border:1px solid var(--line);border-radius:14px;padding:10px;margin-top:10px;background:#FBFCFC}
+.rf{display:grid;gap:8px}
+.rowhead{display:flex;gap:8px}.rowhead select{flex:1;font-weight:700}
+.x{background:var(--red2);color:var(--red);padding:0 14px;min-height:44px}
+.rf2{display:grid;grid-template-columns:1fr 150px;gap:8px}
+.stepper{display:grid;grid-template-columns:44px 1fr 44px;gap:4px}.stepper button{padding:0;font-size:22px;min-height:46px}.stepper input{text-align:center;padding:4px}
+.rf3{display:grid;grid-template-columns:1fr 1fr 1.35fr;gap:6px}.rf3 label{font-size:12px;color:var(--mut);font-weight:700}
+.rfamt{display:flex;justify-content:space-between;align-items:center;background:var(--g2);border-radius:10px;padding:8px 12px}.rfamt strong{color:var(--g);font-size:19px}
+.primary{background:var(--acc);color:var(--on);width:100%;min-height:54px;font-size:18px;margin-top:12px}
+.full{width:100%;margin-top:8px}
+.empty{text-align:center;padding:18px 8px;color:var(--mut);font-size:14px}
+.pbtn{background:var(--acc);color:var(--on)}.dbtn{background:var(--red2);color:var(--red)}
+nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);padding:6px 6px calc(6px + env(safe-area-inset-bottom));z-index:6}
+nav button{background:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:13px;color:var(--mut);padding:6px;position:relative}
+nav button span{font-size:22px}nav button.on{color:var(--g)}
+nav .badge{position:absolute;top:2px;right:calc(50% - 26px);background:#c0392b;color:#fff;border-radius:999px;font-size:11px;min-width:18px;padding:1px 5px}
+.filters{display:grid;grid-template-columns:1fr 1fr;gap:8px}.filters .wide{grid-column:1/-1}
+.total{display:flex;justify-content:space-between;align-items:center;background:var(--g2);border-radius:12px;padding:12px 14px;margin-top:10px}.total strong{font-size:24px;color:var(--g)}
+.gtot{margin-top:8px;font-size:14px}.gtot div{display:flex;justify-content:space-between;padding:5px 2px;border-bottom:1px dashed var(--line)}
+.btn3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px}.btn3 button{padding:12px 6px;font-size:15px}
+.day{margin-top:16px}.dayh{display:flex;justify-content:space-between;font-weight:800;font-size:14px;color:#4A3A12;border-bottom:2px solid var(--g3);padding-bottom:4px}
+.ent{display:flex;justify-content:space-between;gap:10px;padding:10px 4px;border-bottom:1px solid var(--line);cursor:pointer}
+.ent .n{font-weight:700}.ent .m{font-size:13px;color:var(--mut);margin-top:3px}.ent .a{font-weight:800;white-space:nowrap}
+.pill{font-size:12px;background:var(--soft);border-radius:20px;padding:2px 8px;color:#4A3A12;font-weight:700;white-space:nowrap}
+.srow{border:1px solid var(--line);border-radius:12px;padding:8px;margin-top:8px;display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center}
+.srow .small{grid-column:1/-1;min-height:38px;font-size:14px;color:var(--mut)}
+.irow{grid-template-columns:30px 1fr 84px auto}.irow .ic{font-size:22px;text-align:center}
+.addrow{display:flex;gap:8px}.addrow input{flex:1;min-width:0}
+.overlay{position:fixed;inset:0;background:#0008;z-index:20;display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:#fff;border-radius:18px 18px 0 0;padding:16px 14px calc(16px + env(safe-area-inset-bottom));width:100%;max-width:720px;max-height:92vh;overflow:auto}
+.sheet h2{margin:0 0 6px;font-size:18px}
+#bill{position:fixed;inset:0;background:#E9ECEF;z-index:30;overflow:auto}
+.billbar{position:sticky;top:0;display:flex;gap:8px;padding:10px;background:#fff;border-bottom:1px solid var(--line)}
+.billbar button{flex:1;font-size:15px;padding:12px 6px}
+.paper{background:#fff;max-width:760px;margin:12px auto;padding:20px 18px;font-size:14px;color:#111}
+.bh{display:flex;justify-content:space-between;gap:12px;border-bottom:3px solid var(--g);padding-bottom:10px}
+.bhouse{font-size:20px;font-weight:800;color:var(--g)}.btitle{font-size:16px;font-weight:700;margin-top:2px}.bmeta{font-size:12px;text-align:right;color:#444;line-height:1.6}
+.bguest{margin-top:16px;font-size:15px;font-weight:700}
+.paper table{width:100%;border-collapse:collapse;margin-top:6px}.paper th,.paper td{border-bottom:1px solid #ddd;padding:6px 4px;text-align:left;vertical-align:top}
+.paper th{background:var(--soft);font-size:12px}.paper .r{text-align:right;white-space:nowrap}.paper tfoot td{font-weight:800;border-top:2px solid #999}
+.bsm{font-size:11px;color:#666}
+.grand{display:flex;justify-content:space-between;align-items:center;margin-top:16px;background:var(--g2);padding:12px;border-radius:8px;font-size:16px;font-weight:700}.grand strong{font-size:22px;color:var(--g)}
+.words{font-size:12px;margin-top:6px;color:#333}
+.sign{display:flex;justify-content:space-between;gap:20px;margin-top:40px;font-size:13px}.sign div{flex:1;border-top:1px solid #555;padding-top:6px}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 16px;border-radius:12px;font-size:15px;z-index:40;opacity:0;transition:opacity .2s;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1}
+.hidden{display:none!important}
+@media print{
+ body{padding:0;background:#fff}
+ header,main,nav,.overlay,.toast,.billbar{display:none!important}
+ #bill{position:static;background:#fff;overflow:visible}
+ .paper{margin:0;max-width:none;padding:0}
+}
+</style>
+</head>
+<body>
+<header>
+ <div class="hl"><svg class="logo" viewBox="422.04 498.50 491.76 491.76" role="img" aria-label="Suncrest"><path fill="#1B2027" fill-rule="evenodd" d="M434.04 744.38a233.88 233.88 0 1 0 467.76 0a233.88 233.88 0 1 0 -467.76 0zM622.20 588.56L823.80 588.56L715.08 666.44L513.48 666.44zM511.08 682.04L712.68 682.04L824.76 806.84L623.16 806.84zM620.76 822.44L822.36 822.44L713.64 900.32L512.04 900.32z"/></svg><div><div class="brand" id="hTitle"></div><div class="sub" id="hSub"></div></div></div>
+ <button class="lang" data-act="lang" id="langBtn" type="button"></button>
+</header>
+<main>
+ <div id="pageAdd"></div>
+ <div id="pageRecords" class="hidden"></div>
+ <div id="pageSettings" class="hidden"></div>
+ <footer class="foot"><a href="https://www.suncrest.tech" target="_blank" rel="noopener"><svg viewBox="422.04 498.50 491.76 491.76" aria-hidden="true"><path fill="#F5A623" fill-rule="evenodd" d="M434.04 744.38a233.88 233.88 0 1 0 467.76 0a233.88 233.88 0 1 0 -467.76 0zM622.20 588.56L823.80 588.56L715.08 666.44L513.48 666.44zM511.08 682.04L712.68 682.04L824.76 806.84L623.16 806.84zM620.76 822.44L822.36 822.44L713.64 900.32L512.04 900.32z"/></svg>Bolo Bill by Suncrest · www.suncrest.tech</a></footer>
+</main>
+<nav>
+ <button type="button" data-act="nav" data-p="add" id="navAdd"><span>➕</span><b></b></button>
+ <button type="button" data-act="nav" data-p="records" id="navRecords"><span>📋</span><b></b></button>
+ <button type="button" data-act="nav" data-p="settings" id="navSettings"><span>⚙️</span><b></b></button>
+</nav>
+<div id="sheet" class="overlay hidden"><div class="sheet" id="sheetBody"></div></div>
+<div id="bill" class="hidden">
+ <div class="billbar"><button type="button" class="pbtn" data-act="billPrint" id="bPrint"></button><button type="button" data-act="billShare" id="bShare"></button><button type="button" data-act="billClose" id="bClose"></button></div>
+ <div id="billBody"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= TEXT (English / Hindi / Gujarati) ================= */
+const T={
+en:{title:'Bolo Bill',subtitle:'Guest-wise food & tea account',tabAdd:'Add',tabRecords:'Records',tabSettings:'Settings',
+todayTotal:'Today',monthTotal:'This month',speakTitle:'Speak or type',mic:'Tap the mic and speak',listening:'Listening… speak now',understand:'Add',
+typePh:'Type here, or use the 🎤 on your keyboard…',noVoice:'Voice is not available in this browser. Use the 🎤 on your keyboard to speak into this box.',
+voiceNet:'Voice needs an internet connection.',voiceDenied:'Microphone permission was denied. Tap the icon left of the address bar → Permissions → Microphone → Allow.',needLink:'The mic only works when Bolo Bill is opened from its website link (https://…), not from a WhatsApp file. Until then, use the 🎤 on your keyboard.',heard:'Heard',
+nothingFound:'No item understood. Try again or tap items below.',foundN:'{n} entries added below. Please check and save.',
+speakHint:'Example: “Today morning Rahul sir tea and poha, evening tea and snacks, night dinner”. Guest names must be in the guest list.',
+quickTitle:'Or tap to add',guest:'Guest',addGuest:'+ Guest',noGuests:'No guests yet. Add a guest first.',chooseGuest:'Select a guest first',
+reviewTitle:'Check & save',reviewEmpty:'Entries you add will appear here. Check them, then save.',saveAll:'Save all ({n})',clearAll:'Clear list',
+item:'Item',qty:'Qty',rate:'Rate ₹',amount:'Amount',date:'Date',slot:'Time',note:'Note (optional)',
+morning:'Morning',afternoon:'Afternoon',evening:'Evening',night:'Night',saved:'Saved ✓',
+records:'Records',from:'From',to:'To',allGuests:'All guests',today:'Today',thisMonth:'This month',allDates:'All dates',total:'Total',
+empty:'No entries for this selection.',bill:'🧾 Bill',shareW:'📤 Share',csv:'⬇ Excel',
+edit:'Edit entry',save:'Save',del:'Delete',cancel:'Cancel',confirmDel:'Delete this entry?',
+guests:'Guest list',guestPh:'Guest name',add:'Add',aliasPh:'Other spoken names (optional)',removeGuest:'Remove this guest from the list? Old entries will stay.',dupGuest:'This guest already exists.',
+rateCard:'Rate card',itemPh:'New item name',keysPh:'Voice words, comma separated (e.g. poha, upma)',removeItem:'Remove this item from the rate card?',
+billDetails:'Bill details',house:'Guest house name',cook:'Prepared by (cook name)',language:'App language',
+backup:'Backup',saveBackup:'Save backup file',restore:'Restore from backup file',restoreConfirm:'Replace all current data with this backup?',restored:'Backup restored ✓',badFile:'This is not a valid backup file.',
+privacy:'All data stays on this phone. Save a backup file every week and send it to yourself on WhatsApp.',
+billTitle:'Food & Refreshment Bill',period:'Period',preparedBy:'Prepared by',approvedBy:'Approved by',summary:'Item summary',grand:'Grand total',inWords:'In words',guestTotal:'Guest total',
+print:'🖨 Print / PDF',close:'✕ Close',noRecords:'No entries to send.',storageFull:'Could not save – phone storage is full. Save a backup.'},
+hi:{title:'बोलो बिल',subtitle:'मेहमानों का खाने-चाय का हिसाब',tabAdd:'जोड़ें',tabRecords:'हिसाब',tabSettings:'सेटिंग',
+todayTotal:'आज',monthTotal:'इस महीने',speakTitle:'बोलकर या लिखकर जोड़ें',mic:'माइक दबाएँ और बोलें',listening:'सुन रहा है… बोलिए',understand:'जोड़ें',
+typePh:'यहाँ लिखें, या कीबोर्ड का 🎤 दबाकर बोलें…',noVoice:'इस ब्राउज़र में आवाज़ नहीं चलती। कीबोर्ड के 🎤 से इस बॉक्स में बोलें।',
+voiceNet:'आवाज़ के लिए इंटरनेट चाहिए।',voiceDenied:'माइक की अनुमति नहीं मिली। पता-बार के बाईं ओर के निशान → Permissions → Microphone → Allow दबाएँ।',needLink:'माइक तभी चलेगा जब बोलो बिल वेबसाइट लिंक (https://…) से खोला जाए, WhatsApp फ़ाइल से नहीं। तब तक कीबोर्ड का 🎤 इस्तेमाल करें।',heard:'सुना',
+nothingFound:'कोई आइटम समझ नहीं आया। फिर से बोलें या नीचे दबाकर जोड़ें।',foundN:'{n} एंट्री नीचे जोड़ी गईं। जाँचकर सेव करें।',
+speakHint:'उदाहरण: “आज सुबह राहुल सर की चाय और पोहा, शाम को चाय नाश्ता, रात को डिनर” — मेहमान का नाम सूची में होना चाहिए।',
+quickTitle:'या दबाकर जोड़ें',guest:'मेहमान',addGuest:'+ मेहमान',noGuests:'अभी कोई मेहमान नहीं। पहले मेहमान जोड़ें।',chooseGuest:'पहले मेहमान चुनें',
+reviewTitle:'जाँचें और सेव करें',reviewEmpty:'जोड़ी गई एंट्री यहाँ दिखेंगी। जाँचकर सेव करें।',saveAll:'सब सेव करें ({n})',clearAll:'सूची खाली करें',
+item:'आइटम',qty:'मात्रा',rate:'दर ₹',amount:'राशि',date:'तारीख',slot:'समय',note:'नोट (ज़रूरी नहीं)',
+morning:'सुबह',afternoon:'दोपहर',evening:'शाम',night:'रात',saved:'सेव हो गया ✓',
+records:'हिसाब',from:'से',to:'तक',allGuests:'सभी मेहमान',today:'आज',thisMonth:'इस महीने',allDates:'सभी तारीखें',total:'कुल',
+empty:'इस चयन में कोई एंट्री नहीं।',bill:'🧾 बिल',shareW:'📤 शेयर',csv:'⬇ Excel',
+edit:'एंट्री बदलें',save:'सेव',del:'हटाएँ',cancel:'रद्द',confirmDel:'यह एंट्री हटानी है?',
+guests:'मेहमान सूची',guestPh:'मेहमान का नाम',add:'जोड़ें',aliasPh:'बोलने में दूसरा नाम (ज़रूरी नहीं)',removeGuest:'इस मेहमान को सूची से हटाएँ? पुरानी एंट्री रहेंगी।',dupGuest:'यह मेहमान पहले से है।',
+rateCard:'रेट कार्ड',itemPh:'नए आइटम का नाम',keysPh:'बोलने वाले शब्द, कॉमा से अलग (जैसे poha, upma)',removeItem:'यह आइटम रेट कार्ड से हटाएँ?',
+billDetails:'बिल की जानकारी',house:'गेस्ट हाउस का नाम',cook:'बिल बनाने वाला (रसोइये का नाम)',language:'ऐप की भाषा',
+backup:'बैकअप',saveBackup:'बैकअप फ़ाइल सेव करें',restore:'बैकअप फ़ाइल से वापस लाएँ',restoreConfirm:'अभी का पूरा डेटा इस बैकअप से बदल दें?',restored:'बैकअप वापस आ गया ✓',badFile:'यह सही बैकअप फ़ाइल नहीं है।',
+privacy:'सारा डेटा इसी फ़ोन में रहता है। हर हफ़्ते बैकअप फ़ाइल सेव करके WhatsApp पर खुद को भेज दें।',
+billTitle:'खाना और नाश्ता बिल',period:'अवधि',preparedBy:'बनाने वाला',approvedBy:'स्वीकृत',summary:'आइटम सारांश',grand:'कुल राशि',inWords:'शब्दों में',guestTotal:'मेहमान का कुल',
+print:'🖨 प्रिंट / PDF',close:'✕ बंद',noRecords:'भेजने के लिए कोई एंट्री नहीं।',storageFull:'सेव नहीं हुआ – फ़ोन का स्टोरेज भरा है। बैकअप सेव करें।'},
+gu:{title:'બોલો બિલ',subtitle:'મહેમાનોના જમવા-ચાનો હિસાબ',tabAdd:'ઉમેરો',tabRecords:'હિસાબ',tabSettings:'સેટિંગ',
+todayTotal:'આજે',monthTotal:'આ મહિને',speakTitle:'બોલીને કે લખીને ઉમેરો',mic:'માઇક દબાવો અને બોલો',listening:'સાંભળે છે… બોલો',understand:'ઉમેરો',
+typePh:'અહીં લખો, અથવા કીબોર્ડનું 🎤 દબાવીને બોલો…',noVoice:'આ બ્રાઉઝરમાં અવાજ ચાલતો નથી. કીબોર્ડના 🎤 થી આ બોક્સમાં બોલો.',
+voiceNet:'અવાજ માટે ઇન્ટરનેટ જોઈએ.',voiceDenied:'માઇકની પરવાનગી મળી નથી. સરનામા-બારની ડાબી બાજુના નિશાન → Permissions → Microphone → Allow દબાવો.',needLink:'માઇક ત્યારે જ ચાલશે જ્યારે બોલો બિલ વેબસાઇટ લિંક (https://…) થી ખોલવામાં આવે, WhatsApp ફાઇલથી નહીં. ત્યાં સુધી કીબોર્ડનું 🎤 વાપરો.',heard:'સાંભળ્યું',
+nothingFound:'કોઈ આઇટમ સમજાઈ નહીં. ફરી બોલો અથવા નીચે દબાવીને ઉમેરો.',foundN:'{n} એન્ટ્રી નીચે ઉમેરાઈ. તપાસીને સેવ કરો.',
+speakHint:'ઉદાહરણ: “આજે સવારે રાહુલ સરની ચા અને પૌવા, સાંજે ચા નાસ્તો, રાત્રે જમવાનું” — મહેમાનનું નામ યાદીમાં હોવું જોઈએ.',
+quickTitle:'અથવા દબાવીને ઉમેરો',guest:'મહેમાન',addGuest:'+ મહેમાન',noGuests:'હજુ કોઈ મહેમાન નથી. પહેલા મહેમાન ઉમેરો.',chooseGuest:'પહેલા મહેમાન પસંદ કરો',
+reviewTitle:'તપાસો અને સેવ કરો',reviewEmpty:'ઉમેરેલી એન્ટ્રી અહીં દેખાશે. તપાસીને સેવ કરો.',saveAll:'બધું સેવ કરો ({n})',clearAll:'યાદી ખાલી કરો',
+item:'આઇટમ',qty:'સંખ્યા',rate:'ભાવ ₹',amount:'રકમ',date:'તારીખ',slot:'સમય',note:'નોંધ (જરૂરી નથી)',
+morning:'સવાર',afternoon:'બપોર',evening:'સાંજ',night:'રાત',saved:'સેવ થઈ ગયું ✓',
+records:'હિસાબ',from:'થી',to:'સુધી',allGuests:'બધા મહેમાન',today:'આજે',thisMonth:'આ મહિને',allDates:'બધી તારીખો',total:'કુલ',
+empty:'આ પસંદગીમાં કોઈ એન્ટ્રી નથી.',bill:'🧾 બિલ',shareW:'📤 શેર',csv:'⬇ Excel',
+edit:'એન્ટ્રી બદલો',save:'સેવ',del:'કાઢો',cancel:'રદ',confirmDel:'આ એન્ટ્રી કાઢી નાખવી છે?',
+guests:'મહેમાન યાદી',guestPh:'મહેમાનનું નામ',add:'ઉમેરો',aliasPh:'બોલવામાં બીજું નામ (જરૂરી નથી)',removeGuest:'આ મહેમાનને યાદીમાંથી કાઢવા છે? જૂની એન્ટ્રી રહેશે.',dupGuest:'આ મહેમાન પહેલેથી છે.',
+rateCard:'ભાવ પત્રક',itemPh:'નવી આઇટમનું નામ',keysPh:'બોલવાના શબ્દો, અલ્પવિરામથી અલગ (જેમ કે poha, upma)',removeItem:'આ આઇટમ ભાવ પત્રકમાંથી કાઢવી છે?',
+billDetails:'બિલની વિગત',house:'ગેસ્ટ હાઉસનું નામ',cook:'બિલ બનાવનાર (રસોઇયાનું નામ)',language:'એપની ભાષા',
+backup:'બેકઅપ',saveBackup:'બેકઅપ ફાઇલ સેવ કરો',restore:'બેકઅપ ફાઇલમાંથી પાછું લાવો',restoreConfirm:'હાલનો બધો ડેટા આ બેકઅપથી બદલવો છે?',restored:'બેકઅપ પાછું આવ્યું ✓',badFile:'આ સાચી બેકઅપ ફાઇલ નથી.',
+privacy:'બધો ડેટા આ ફોનમાં જ રહે છે. દર અઠવાડિયે બેકઅપ ફાઇલ સેવ કરીને WhatsApp પર પોતાને મોકલો.',
+billTitle:'જમવા અને નાસ્તાનું બિલ',period:'સમયગાળો',preparedBy:'બનાવનાર',approvedBy:'મંજૂર',summary:'આઇટમ સારાંશ',grand:'કુલ રકમ',inWords:'શબ્દોમાં',guestTotal:'મહેમાનનો કુલ',
+print:'🖨 પ્રિન્ટ / PDF',close:'✕ બંધ',noRecords:'મોકલવા માટે કોઈ એન્ટ્રી નથી.',storageFull:'સેવ ન થયું – ફોનનું સ્ટોરેજ ભરાઈ ગયું છે. બેકઅપ સેવ કરો.'}
+};
+const LANGS=[['hi','हिंदी'],['gu','ગુજરાતી'],['en','English']];
+const VLANGS=[['hi-IN','हिंदी'],['gu-IN','ગુજરાતી'],['en-IN','English']];
+const LOCALE={en:'en-IN',hi:'hi-IN',gu:'gu-IN'};
+
+/*PARSER-START*/
+/* ================= DATA HELPERS ================= */
+const KEY='cookExpenseV2';
+const pad=n=>String(n).padStart(2,'0');
+const isoOf=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const todayISO=()=>isoOf(new Date());
+const addDays=(s,n)=>{const d=new Date(s+'T00:00:00');d.setDate(d.getDate()+n);return isoOf(d)};
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const clone=o=>JSON.parse(JSON.stringify(o));
+const SLOTS=['morning','afternoon','evening','night'];
+const SLOT_ORDER={morning:1,afternoon:2,evening:3,night:4,'':5};
+function slotNow(){const h=new Date().getHours();return h<11?'morning':h<16?'afternoon':h<19?'evening':'night'}
+
+const DEFAULT_ITEMS=[
+ {id:'breakfast',icon:'🍳',meal:'morning',rate:50,name:{en:'Breakfast',hi:'नाश्ता',gu:'નાસ્તો'},
+  keys:'breakfast, brekfast, poha, pauva, pouva, upma, paratha, parotha, aloo paratha, thepla, idli, dosa, uttapam, puri, aloo puri, chilla, fafda, jalebi, handvo, oats, cornflakes, daliya, bread butter, bread jam, sev usal, misal'},
+ {id:'tea',icon:'🍵',rate:20,name:{en:'Tea',hi:'चाय',gu:'ચા'},keys:'tea, chai, chay, cha, chaa, tee, green tea, black tea, lemon tea, masala chai'},
+ {id:'coffee',icon:'☕',rate:10,name:{en:'Coffee',hi:'कॉफी',gu:'કોફી'},keys:'coffee, kofi, kafi, kaafi, cofee, cold coffee, black coffee'},
+ {id:'lunch',icon:'🍛',meal:'afternoon',rate:180,name:{en:'Lunch',hi:'दोपहर का खाना',gu:'બપોરનું જમણ'},keys:'lunch, lanch, laanch'},
+ {id:'dinner',icon:'🍽️',meal:'night',rate:180,name:{en:'Dinner',hi:'रात का खाना',gu:'રાતનું જમણ'},keys:'dinner, diner, dinar'},
+ {id:'milk',icon:'🥛',rate:20,name:{en:'Milk',hi:'दूध',gu:'દૂધ'},keys:'milk, doodh, dudh, haldi doodh, bournvita'},
+ {id:'eggs',icon:'🥚',rate:15,name:{en:'Eggs',hi:'अंडे',gu:'ઈંડા'},keys:'egg, eggs, anda, ande, andaa, inda, enda, eenda, omelette, omelet, omlet, amlet, bhurji, boiled egg, egg bhurji'},
+ {id:'snacks',icon:'🥪',rate:10,name:{en:'Snacks',hi:'स्नैक्स',gu:'ફરસાણ'},keys:'snack, snacks, samosa, kachori, pakoda, pakora, bhajiya, bhajia, dhokla, khaman, biscuit, biscuits, biskit, namkeen, chips, sev, vada pav, vadapav, sandwich, toast, maggi, khakhra, farsan'},
+ {id:'other',icon:'🛒',rate:0,name:{en:'Other',hi:'अन्य',gu:'અન્ય'},keys:''}
+];
+let S=null; // app state
+const itemById=id=>S.items.find(i=>i.id===id);
+
+/* ================= VOICE / TEXT UNDERSTANDING ================= */
+// Devanagari -> rough Latin (Gujarati is first shifted to Devanagari)
+const DEV_C={'क':'k','ख':'kh','ग':'g','घ':'gh','ङ':'n','च':'ch','छ':'chh','ज':'j','झ':'jh','ञ':'n','ट':'t','ठ':'th','ड':'d','ढ':'dh','ण':'n','त':'t','थ':'th','द':'d','ध':'dh','न':'n','प':'p','फ':'ph','ब':'b','भ':'bh','म':'m','य':'y','र':'r','ल':'l','ळ':'l','व':'v','श':'sh','ष':'sh','स':'s','ह':'h','\u0958':'q','\u0959':'kh','\u095A':'g','\u095B':'z','\u095C':'r','\u095D':'rh','\u095E':'f','\u095F':'y'};
+const DEV_V={'अ':'a','आ':'aa','इ':'i','ई':'ee','उ':'u','ऊ':'oo','ऋ':'ri','ए':'e','ऐ':'ai','ओ':'o','औ':'au','ऑ':'o','ऍ':'e'};
+const DEV_M={'ा':'aa','ि':'i','ी':'ee','ु':'u','ू':'oo','ृ':'ri','े':'e','ै':'ai','ो':'o','ौ':'au','ॉ':'o','ॅ':'e'};
+const NUKTA={'क':'q','ज':'z','ड':'r','ढ':'rh','फ':'f'};
+function translit(str){
+ str=String(str).replace(/[\u0A80-\u0AFF]/g,c=>String.fromCharCode(c.charCodeAt(0)-0x180))
+  .replace(/[\u0966-\u096F]/g,c=>String(c.charCodeAt(0)-0x966));
+ const ch=[...str];let out='';
+ for(let i=0;i<ch.length;i++){
+  const c=ch[i];
+  if(DEV_C[c]){
+   let cons=DEV_C[c],j=i+1;
+   if(ch[j]==='\u093C'){cons=NUKTA[c]||cons;j++}
+   const nx=ch[j];
+   if(nx==='\u094D'){out+=cons;i=j;continue}
+   if(DEV_M[nx]){out+=cons+DEV_M[nx];i=j;continue}
+   const end=!nx||!/[\u0900-\u097F]/.test(nx);
+   out+=cons+(end?'':'a');i=j-1;continue;
+  }
+  if(DEV_V[c]){out+=DEV_V[c];continue}
+  if(DEV_M[c]){out+=DEV_M[c];continue}
+  if(c==='\u0902'||c==='\u0901'){out+='n';continue}
+  if(c==='\u0903'){out+='h';continue}
+  if(c==='\u094D'||c==='\u093C')continue;
+  out+=c;
+ }
+ return out;
+}
+// sound-alike key so "chai", "chaay", "चाय" all compare equal
+function skel(w){
+ let s=String(w).toLowerCase().replace(/[^a-z0-9]/g,'');
+ if(!s||/^\d/.test(s))return s;
+ s=s.replace(/chh|ch/g,'C').replace(/c/g,'k').replace(/C/g,'c')
+  .replace(/sh/g,'s').replace(/ph/g,'f').replace(/kh/g,'k').replace(/gh/g,'g').replace(/th/g,'t').replace(/dh/g,'d').replace(/bh/g,'b').replace(/jh/g,'j').replace(/rh/g,'r')
+  .replace(/w/g,'v').replace(/z/g,'j').replace(/q/g,'k').replace(/x/g,'ks')
+  .replace(/(.)h/g,'$1')
+  .replace(/aa+/g,'a').replace(/ee|ii|ie|ea|iy/g,'i').replace(/oo|uu|ou/g,'u').replace(/ai|ae|ay|ei|ey/g,'e').replace(/au|ao/g,'o')
+  .replace(/(.)\1+/g,'$1');
+ if(s.length>=3)s=s.replace(/a$/,'');
+ return s;
+}
+function cskel(w){const s=skel(w);return s?(s[0]+s.slice(1).replace(/[aeiou]/g,'')).replace(/(.)\1+/g,'$1'):''}
+
+const STOP=new Set(('ka ki ke kee ko me mein men main mai hai hain he tha thi the thaa thee se par pe bhi liye lie liya vala vali wala wali wale vaala vaali vaale '+
+ 'add kar karo kardo karna kariye karde karke kare dena dijiye dijie de likh likho likhdo likhna entry entri '+
+ 'sir sar ji jee bhai bhaai bhaiya saab sahab saheb saahab sahib madam mam ben bahen didi mr mrs ms dr shri shree '+
+ 'che chhe chhee nu no ni na ne ma maa thi pan karvu karvo umero umerjo nakho lakho naam '+
+ 'a an for of in at to is was are please plz kripya chahiye chahie chaahie chaahiye chahe chaahe '+
+ 'mujhe maine hum humne wo vo ye yeh sab sabka sabki unka unki iska kiya hua hui gaya gayi gai diya ok okay haan han').split(/\s+/));
+const CONJ=new Set('and aur or ane tatha plus evam'.split(' '));
+const UNIT=new Set('cup cups kap plate plates glass glasses pyala pyali piece pieces pcs pc nag katori packet packets bowl bowls'.split(' '));
+const NUMW={ek:1,one:1,do:2,two:2,be:2,teen:3,tin:3,three:3,tran:3,char:4,chaar:4,four:4,paanch:5,panch:5,five:5,chh:6,chhah:6,chha:6,six:6,saat:7,seven:7,aath:8,eight:8,nau:9,nine:9,das:10,dus:10,ten:10};
+const DATEW=[['today aaj aj aaje aje',0],['yesterday kal kaal gaikale gaikal gayikale',-1],['parso parson parsoon',-2]];
+const SLOTW=[['morning subah subha savere savera sawere savar savare savaare prabhat','morning'],['afternoon noon dopahar dupahar dopehar bapor bapore','afternoon'],['evening sham shaam saanj sanj sanje saanje sandhya','evening'],['night raat rat raate raatre ratre ratri raatri','night']];
+const NASHTAW='nashta nasta naashta naasta nashto nasto naasto naashto'.split(' ');
+const MEALW='khana khaana bhojan jaman jamvanu jamvaanu jamavanu jamavanun jamvanun jamavaanun meal thali'.split(' ');
+const MEAL_DISH='dal daal chawal chaval chaaval rice roti rotli chapati chapatti phulka sabzi sabji subzi shaak shak kadhi kadi khichdi khichadi paneer biryani pulao pulav rajma chole bhaat bhat'.split(' ');
+const GENERIC=new Set('breakfast brekfast lunch lanch laanch dinner diner dinar tea chai chay cha chaa tee coffee kofi kafi kaafi cofee milk doodh dudh egg eggs anda ande andaa inda enda eenda snack snacks'.split(' ').map(skel));
+
+function buildLex(){
+ const lex=new Map(),clex=new Map();
+ const put=(w,v)=>{const j=String(w).toLowerCase().replace(/\s+/g,'');const k=skel(j);if(!k)return;if(!lex.has(k))lex.set(k,v);const c=cskel(j);if(c.length>=3&&!clex.has(c))clex.set(c,v)};
+ DATEW.forEach(([ws,off])=>ws.split(' ').forEach(w=>put(w,{type:'date',off})));
+ SLOTW.forEach(([ws,s])=>ws.split(' ').forEach(w=>put(w,{type:'slot',slot:s})));
+ NASHTAW.forEach(w=>put(w,{type:'nashta'}));
+ MEALW.forEach(w=>put(w,{type:'meal',generic:true}));
+ MEAL_DISH.forEach(w=>put(w,{type:'meal',generic:false,word:w}));
+ for(const it of S.items){
+  Object.values(it.name||{}).filter(Boolean).forEach(n=>String(n).split(/[\/(),]/).forEach(p=>{p=p.trim();if(!p)return;put(p,{type:'item',id:it.id,generic:true});const tl=translit(p);if(tl!==p)put(tl,{type:'item',id:it.id,generic:true})}));
+  String(it.keys||'').split(',').forEach(k=>{k=k.trim();if(!k)return;const tk=translit(k).toLowerCase();put(tk,{type:'item',id:it.id,generic:GENERIC.has(skel(tk.replace(/\s+/g,''))),word:k})});
+ }
+ return {lex,clex};
+}
+function guestKeys(){
+ const prim=[],sec=[];
+ for(const g of S.guests){
+  const forms=[g.name,...String(g.aliases||'').split(',')].map(s=>s.trim()).filter(Boolean);
+  for(const f of forms){
+   const words=translit(f).toLowerCase().split(/[^a-z0-9]+/).filter(w=>w&&!STOP.has(w));
+   if(!words.length)continue;
+   prim.push({name:g.name,k:skel(words[0]),c:cskel(words[0])});
+   if(words.length>1){const j=words.join('');prim.push({name:g.name,k:skel(j),c:cskel(j),full:true});words.slice(1).forEach(w=>sec.push({name:g.name,k:skel(w),c:cskel(w)}))}
+  }
+ }
+ const cnt={};sec.forEach(s=>{cnt[s.k]=(cnt[s.k]||new Set()).add(s.name)});
+ return prim.concat(sec.filter(s=>cnt[s.k].size===1)).filter(x=>x.k.length>=3);
+}
+function matchGuest(w,keys,fullOnly){
+ const k=skel(w);if(k.length<3)return null;
+ for(const g of keys){if(fullOnly&&!g.full)continue;if(k===g.k)return g.name}
+ if(fullOnly)return null;
+ for(const g of keys)if(g.k.length>=4&&k.startsWith(g.k))return g.name;
+ const c=cskel(w);
+ for(const g of keys)if(g.c.length>=3&&c===g.c)return g.name;
+ return null;
+}
+function tokens(text){
+ return translit(text).toLowerCase().replace(/(\d+(\.\d+)?)/g,' $1 ').replace(/[^a-z0-9.]+/g,' ')
+  .split(/\s+/).map(w=>w.replace(/^\.+|\.+$/g,'')).filter(Boolean);
+}
+function parse(text,ctxGuest){
+ const L=buildLex(),GK=guestKeys(),toks=tokens(text),cls=[];
+ for(let i=0;i<toks.length;i++){
+  const w=toks[i];
+  if(i+1<toks.length&&!STOP.has(w)&&!STOP.has(toks[i+1])){
+   const bi=w+toks[i+1];
+   const g=matchGuest(bi,GK,true);if(g){cls.push({type:'guest',name:g});i++;continue}
+   const v=L.lex.get(skel(bi));if(v&&(v.type==='item'||v.type==='meal')){cls.push({...v});i++;continue}
+  }
+  if(/^\d+(\.\d+)?$/.test(w)){cls.push({type:'num',n:Number(w)});continue}
+  if(Object.prototype.hasOwnProperty.call(NUMW,w)){cls.push({type:'num',n:NUMW[w]});continue}
+  if(UNIT.has(w)){cls.push({type:'unit'});continue}
+  if(STOP.has(w))continue;
+  if(CONJ.has(w)){cls.push({type:'conj'});continue}
+  const g=matchGuest(w,GK);if(g){cls.push({type:'guest',name:g});continue}
+  let v=L.lex.get(skel(w));if(!v){const c=cskel(w);if(c.length>=3)v=L.clex.get(c)}
+  cls.push(v?{...v}:{type:'other',w});
+ }
+ let off=0,slot='',group=null,lastNum=null,prev=null,prev2=null,lastGuest='';
+ const occ=[],pend=[];
+ const MEAL_BY_SLOT={morning:'breakfast',afternoon:'lunch',evening:'dinner',night:'dinner'};
+ for(const c of cls){
+  if(c.type==='unit')continue;
+  if(c.type==='num'){lastNum=c.n;prev2=prev;prev=c;continue}
+  if(c.type==='date')off=c.off;
+  else if(c.type==='slot')slot=c.slot;
+  else if(c.type==='guest'){
+   lastGuest=c.name;
+   const joined=group&&prev&&(prev.type==='guest'||(prev.type==='conj'&&prev2&&prev2.type==='guest'));
+   if(joined){if(!group.includes(c.name))group.push(c.name)}
+   else{group=[c.name];if(pend.length){pend.forEach(o=>o.guests=group);pend.length=0}}
+  }
+  else if(c.type==='item'||c.type==='meal'||c.type==='nashta'){
+   let id=null,s=slot,generic=!!c.generic,note=c.generic?'':(c.word||'');
+   if(c.type==='item'){id=c.id;const it=itemById(id);if(it&&it.meal){s=it.meal;slot=s}}
+   else if(c.type==='meal'){const sl=slot||slotNow();id=MEAL_BY_SLOT[sl];const it=itemById(id);s=(it&&it.meal)||sl;slot=s}
+   else{const sl=slot||slotNow();generic=true;if(sl==='morning'){id='breakfast';s='morning';slot='morning'}else{id='snacks';s=sl;slot=sl}}
+   if(id&&itemById(id)){const o={id,qty:lastNum>0?lastNum:1,slot:s,generic,note,guests:group};occ.push(o);if(!group)pend.push(o)}
+  }
+  lastNum=null;prev2=prev;prev=c;
+ }
+ const dflt=[ctxGuest||''];pend.forEach(o=>o.guests=dflt);
+ const date=addDays(todayISO(),off),rows=[],mealIdx=new Map();
+ for(const o of occ)for(const g of o.guests){
+  const it=itemById(o.id);
+  if(it.meal){
+   const key=g+'|'+o.id+'|'+o.slot,ex=mealIdx.get(key);
+   if(ex){if(o.note&&!ex.notes.includes(o.note))ex.notes.push(o.note);if(o.qty>ex.qty)ex.qty=o.qty;continue}
+   const r={guest:g,itemId:o.id,qty:o.qty,slot:o.slot,notes:o.note?[o.note]:[],date};mealIdx.set(key,r);rows.push(r);
+  }else rows.push({guest:g,itemId:o.id,qty:o.qty,slot:o.slot,notes:o.note?[o.note]:[],date});
+ }
+ rows.forEach(r=>{r.note=r.notes.join(', ');delete r.notes});
+ return {rows,lastGuest};
+}
+/*PARSER-END*/
+
+/* ================= STATE ================= */
+function migrateOld(old){
+ return (old||[]).filter(e=>e&&e.date).map(e=>{const d=DEFAULT_ITEMS.find(i=>i.id===e.category);return{id:e.id||uid(),date:e.date,guest:e.person||e.guest||'',itemId:e.category||e.itemId||'other',itemName:d?d.name.en:(e.itemName||e.category||''),qty:Number(e.qty)||1,rate:Number(e.rate)||0,amount:Number(e.amount)||0,note:e.note||'',slot:e.slot||'',created:e.created||Date.now()}});
+}
+function fresh(){
+ const l=(navigator.language||'').toLowerCase().startsWith('gu')?'gu':'hi';
+ return {version:2,guests:[],items:clone(DEFAULT_ITEMS),entries:[],draft:[],settings:{lang:l,voiceLang:l+'-IN',house:'',cook:'',lastGuest:''}};
+}
+function normalize(s){
+ const f=fresh();
+ s=s&&typeof s==='object'?s:{};
+ s.version=2;
+ s.guests=Array.isArray(s.guests)?s.guests.filter(g=>g&&g.name).map(g=>({id:g.id||uid(),name:String(g.name),aliases:g.aliases||''})):[];
+ s.items=Array.isArray(s.items)&&s.items.length?s.items:f.items;
+ s.entries=Array.isArray(s.entries)?s.entries:[];
+ s.draft=Array.isArray(s.draft)?s.draft:[];
+ s.settings=Object.assign(f.settings,s.settings||{});
+ return s;
+}
+function load(){
+ let s=null;try{s=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
+ if(!s){
+  s=fresh();
+  try{const old=JSON.parse(localStorage.getItem('cookExpenseEntries')||'[]');if(Array.isArray(old)&&old.length)s.entries=migrateOld(old)}catch(e){}
+ }
+ S=normalize(s);save();
+}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){toast(t('storageFull'))}}
+
+/* ================= UI HELPERS ================= */
+const $=s=>document.querySelector(s);
+let lang='hi',page='add',vstatus='',listening=false,rec=null,editObj=null,billList=[];
+const rf={guest:'all',from:'',to:''};
+function t(k,v){let s=(T[lang]&&T[lang][k])||T.en[k]||k;if(v)for(const x in v)s=s.replace('{'+x+'}',v[x]);return s}
+function safe(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+const money=n=>new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',minimumFractionDigits:0,maximumFractionDigits:2}).format(Number(n)||0);
+const num=n=>new Intl.NumberFormat('en-IN',{maximumFractionDigits:2}).format(Number(n)||0);
+const amt=o=>Math.round((Number(o.qty)||0)*(Number(o.rate)||0)*100)/100;
+const sum=l=>Math.round(l.reduce((s,e)=>s+(Number(e.amount)||0),0)*100)/100;
+function iname(it,l){l=l||lang;const n=(it&&it.name)||{};return n[l]||n.en||Object.values(n).find(Boolean)||(it&&it.id)||''}
+const ename=e=>{const it=itemById(e.itemId);return it?iname(it):(e.itemName||e.itemId)};
+const icon=e=>(itemById(e.itemId)||{}).icon||'🍽️';
+const slotName=s=>s?t(s):'';
+function fmtDate(iso,wd,yr){if(!iso)return'';try{return new Date(iso+'T00:00:00').toLocaleDateString(LOCALE[lang],Object.assign({day:'numeric',month:'short'},wd?{weekday:'short'}:{},yr?{year:'numeric'}:{}))}catch(e){return iso}}
+let toastTimer;function toast(m){const el=$('#toast');el.textContent=m;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2600)}
+const guestNames=()=>S.guests.map(g=>g.name);
+
+function itemOptions(sel,fallback){
+ let h=S.items.map(it=>`<option value="${safe(it.id)}" ${it.id===sel?'selected':''}>${it.icon||'🍽️'} ${safe(iname(it))}</option>`).join('');
+ if(sel&&!itemById(sel))h=`<option value="${safe(sel)}" selected>${safe(fallback||sel)}</option>`+h;
+ return h;
+}
+function guestOptions(sel){
+ let names=guestNames();if(sel&&!names.includes(sel))names=[sel,...names];
+ return `<option value="">— ${safe(t('chooseGuest'))} —</option>`+names.map(n=>`<option ${n===sel?'selected':''}>${safe(n)}</option>`).join('');
+}
+const slotOptions=sel=>`<option value="">—</option>`+SLOTS.map(s=>`<option value="${s}" ${s===sel?'selected':''}>${t(s)}</option>`).join('');
+function rowFields(o,isDraft){
+ return `<div class="rf">
+  <div class="rowhead"><select data-f="itemId" aria-label="${t('item')}">${itemOptions(o.itemId,o.itemName)}</select>${isDraft?`<button type="button" class="x" data-act="ddel" aria-label="${t('del')}">✕</button>`:''}</div>
+  <div class="rf2"><select data-f="guest" class="${o.guest?'':'warn'}" aria-label="${t('guest')}">${guestOptions(o.guest)}</select>
+   <div class="stepper"><button type="button" data-act="minus">−</button><input data-f="qty" type="number" inputmode="decimal" min="0" step="any" value="${safe(o.qty)}" aria-label="${t('qty')}"><button type="button" data-act="plus">+</button></div></div>
+  <div class="rf3"><label>${t('rate')}<input data-f="rate" type="number" inputmode="decimal" min="0" step="any" value="${safe(o.rate)}"></label>
+   <label>${t('slot')}<select data-f="slot">${slotOptions(o.slot)}</select></label>
+   <label>${t('date')}<input data-f="date" type="date" value="${safe(o.date)}"></label></div>
+  <input data-f="note" maxlength="100" placeholder="${t('note')}" value="${safe(o.note)}">
+  <div class="rfamt"><span>${t('amount')}</span><strong data-amt>${money(amt(o))}</strong></div>
+ </div>`;
+}
+
+/* ================= PAGES ================= */
+function renderAll(){
+ document.documentElement.lang=lang;
+ $('#hTitle').textContent=t('title');$('#hSub').textContent=t('subtitle');
+ const cur=LANGS.find(x=>x[0]===lang);$('#langBtn').textContent='🌐 '+cur[1];
+ $('#navAdd b').textContent=t('tabAdd');$('#navRecords b').textContent=t('tabRecords');$('#navSettings b').textContent=t('tabSettings');
+ $('#bPrint').textContent=t('print');$('#bShare').textContent=t('shareW');$('#bClose').textContent=t('close');
+ renderPage();
+}
+function renderPage(){
+ ['add','records','settings'].forEach(p=>{$('#page'+p[0].toUpperCase()+p.slice(1)).classList.toggle('hidden',p!==page);$('#nav'+p[0].toUpperCase()+p.slice(1)).classList.toggle('on',p===page)});
+ const nb=$('#navAdd');let b=nb.querySelector('.badge');if(S.draft.length&&page!=='add'){if(!b){b=document.createElement('i');b.className='badge';nb.appendChild(b)}b.textContent=S.draft.length}else if(b)b.remove();
+ if(page==='add')renderAdd();else if(page==='records')renderRecords();else renderSettings();
+}
+function showPage(p){page=p;renderPage();window.scrollTo(0,0)}
+
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+function renderAdd(){
+ const keep=$('#vtext')?$('#vtext').value:'';
+ const td=todayISO(),m=td.slice(0,7),g=S.settings.lastGuest;
+ $('#pageAdd').innerHTML=`
+ <div class="stats"><div class="stat"><small>${t('todayTotal')}</small><strong>${money(sum(S.entries.filter(e=>e.date===td)))}</strong></div><div class="stat"><small>${t('monthTotal')}</small><strong>${money(sum(S.entries.filter(e=>String(e.date).startsWith(m))))}</strong></div></div>
+ <section class="panel voice">
+  <h2>🎤 ${t('speakTitle')}</h2>
+  <div class="chips center">${VLANGS.map(([v,n])=>`<button type="button" class="chip ${S.settings.voiceLang===v?'on':''}" data-act="vlang" data-v="${v}">${n}</button>`).join('')}</div>
+  ${SR?`<button type="button" class="mic ${listening?'live':''}" data-act="mic" aria-label="${t('mic')}">🎤</button>`:''}
+  <div class="status" id="vstatus">${safe(vstatus||(listening?t('listening'):(SR?t('mic'):t('noVoice'))))}</div>
+  <div class="vrow"><textarea id="vtext" rows="2" placeholder="${t('typePh')}"></textarea><button type="button" data-act="parseText">${t('understand')}</button></div>
+  <div class="hint">${t('speakHint')}</div>
+ </section>
+ <section class="panel">
+  <h2>👆 ${t('quickTitle')}</h2>
+  <label class="l">${t('guest')}</label>
+  <div class="chips">${S.guests.map(x=>`<button type="button" class="chip ${x.name===g?'on':''}" data-act="pickGuest" data-name="${safe(x.name)}">${safe(x.name)}</button>`).join('')}<button type="button" class="chip" data-act="quickGuest">${t('addGuest')}</button></div>
+  ${S.guests.length?'':`<div class="hint">${t('noGuests')}</div>`}
+  <div class="tiles">${S.items.map(it=>`<button type="button" class="tile" data-act="tile" data-id="${safe(it.id)}"><span class="ic">${it.icon||'🍽️'}</span>${safe(iname(it))}<small>${money(it.rate)}</small></button>`).join('')}</div>
+ </section>
+ <section class="panel" id="reviewPanel">
+  <h2>✅ ${t('reviewTitle')}</h2>
+  ${S.draft.length?S.draft.map(o=>`<div class="drow" data-id="${o.id}">${rowFields(o,true)}</div>`).join(''):`<div class="empty">${t('reviewEmpty')}</div>`}
+  ${S.draft.length?`<button type="button" class="primary" data-act="saveAll">${t('saveAll',{n:S.draft.length})}</button><button type="button" class="full" data-act="clearDraft">${t('clearAll')}</button>`:''}
+ </section>`;
+ $('#vtext').value=keep;
+}
+
+function filtered(){
+ return S.entries.filter(e=>(rf.guest==='all'||e.guest===rf.guest)&&(!rf.from||e.date>=rf.from)&&(!rf.to||e.date<=rf.to));
+}
+const cmpAsc=(a,b)=>a.date.localeCompare(b.date)||(SLOT_ORDER[a.slot||'']-SLOT_ORDER[b.slot||''])||((a.created||0)-(b.created||0));
+function renderRecords(){
+ const list=filtered().sort((a,b)=>b.date.localeCompare(a.date)||cmpAsc(a,b));
+ const names=[...new Set([...guestNames(),...S.entries.map(e=>e.guest).filter(Boolean)])].sort((a,b)=>a.localeCompare(b));
+ const days=[];let cur=null;for(const e of list){if(!cur||cur.date!==e.date){cur={date:e.date,items:[]};days.push(cur)}cur.items.push(e)}
+ let gt='';
+ if(rf.guest==='all'&&list.length){const m=new Map();list.forEach(e=>m.set(e.guest,(m.get(e.guest)||0)+(Number(e.amount)||0)));if(m.size>1)gt=`<div class="gtot">${[...m].sort((a,b)=>b[1]-a[1]).map(([g,v])=>`<div><span>👤 ${safe(g||'—')}</span><b>${money(v)}</b></div>`).join('')}</div>`}
+ const td=todayISO(),ms=td.slice(0,8)+'01';
+ const pre=rf.from===td&&rf.to===td?'today':rf.from===ms&&rf.to===td?'month':!rf.from&&!rf.to?'all':'';
+ $('#pageRecords').innerHTML=`<section class="panel"><h2>📋 ${t('records')}</h2>
+  <div class="filters">
+   <div class="wide"><label class="l">${t('guest')}</label><select id="recGuest"><option value="all">${t('allGuests')}</option>${names.map(n=>`<option ${n===rf.guest?'selected':''}>${safe(n)}</option>`).join('')}</select></div>
+   <div><label class="l">${t('from')}</label><input type="date" id="recFrom" value="${rf.from}"></div>
+   <div><label class="l">${t('to')}</label><input type="date" id="recTo" value="${rf.to}"></div>
+  </div>
+  <div class="chips" style="margin-top:10px">${[['today','today'],['month','thisMonth'],['all','allDates']].map(([p,k])=>`<button type="button" class="chip ${pre===p?'on':''}" data-act="preset" data-p="${p}">${t(k)}</button>`).join('')}</div>
+  <div class="total"><span>${t('total')} (${list.length})</span><strong>${money(sum(list))}</strong></div>
+  ${gt}
+  <div class="btn3"><button type="button" class="pbtn" data-act="bill">${t('bill')}</button><button type="button" data-act="share">${t('shareW')}</button><button type="button" data-act="csv">${t('csv')}</button></div>
+  ${days.length?days.map(d=>`<div class="day"><div class="dayh"><span>${fmtDate(d.date,true)}</span><span>${money(sum(d.items))}</span></div>${d.items.map(e=>`<div class="ent" data-act="openEdit" data-id="${safe(e.id)}"><div><div class="n">${icon(e)} ${safe(ename(e))} <span class="pill">${safe(e.guest||'—')}</span></div><div class="m">${num(e.qty)} × ${money(e.rate)}${e.slot?' · '+slotName(e.slot):''}${e.note?' · '+safe(e.note):''}</div></div><div class="a">${money(e.amount)}</div></div>`).join('')}</div>`).join(''):`<div class="empty">${t('empty')}</div>`}
+ </section>`;
+}
+
+function renderSettings(){
+ $('#pageSettings').innerHTML=`
+ <section class="panel"><h2>👤 ${t('guests')}</h2>
+  <div class="addrow"><input id="newGuest" maxlength="40" placeholder="${t('guestPh')}"><button type="button" class="pbtn" data-act="gadd">${t('add')}</button></div>
+  ${S.guests.map(g=>`<div class="srow" data-gid="${g.id}"><input data-g="name" value="${safe(g.name)}" maxlength="40"><button type="button" class="x" data-act="gdel">✕</button><input class="small" data-g="aliases" value="${safe(g.aliases||'')}" placeholder="${t('aliasPh')}"></div>`).join('')||`<div class="empty">${t('noGuests')}</div>`}
+ </section>
+ <section class="panel"><h2>₹ ${t('rateCard')}</h2>
+  ${S.items.map(it=>`<div class="srow irow" data-iid="${safe(it.id)}"><span class="ic">${it.icon||'🍽️'}</span><input data-i="name" value="${safe(iname(it))}"><input data-i="rate" type="number" inputmode="decimal" min="0" step="any" value="${safe(it.rate)}"><button type="button" class="x" data-act="idel">✕</button><input class="small" data-i="keys" value="${safe(it.keys||'')}" placeholder="${t('keysPh')}"></div>`).join('')}
+  <div class="addrow" style="margin-top:10px"><input id="newItem" placeholder="${t('itemPh')}"><input id="newItemRate" type="number" inputmode="decimal" min="0" placeholder="₹" style="max-width:84px"><button type="button" class="pbtn" data-act="iadd">${t('add')}</button></div>
+ </section>
+ <section class="panel"><h2>🧾 ${t('billDetails')}</h2>
+  <label class="l">${t('house')}</label><input data-s="house" value="${safe(S.settings.house)}">
+  <label class="l" style="margin-top:10px">${t('cook')}</label><input data-s="cook" value="${safe(S.settings.cook)}">
+ </section>
+ <section class="panel"><h2>🌐 ${t('language')}</h2>
+  <div class="chips">${LANGS.map(([l,n])=>`<button type="button" class="chip ${l===lang?'on':''}" data-act="setLang" data-l="${l}">${n}</button>`).join('')}</div>
+ </section>
+ <section class="panel"><h2>💾 ${t('backup')}</h2>
+  <button type="button" class="full" data-act="backup">${t('saveBackup')}</button>
+  <button type="button" class="full" data-act="restore">${t('restore')}</button>
+  <input type="file" id="restoreFile" accept=".json,application/json" class="hidden">
+  <div class="hint">${t('privacy')}</div>
+ </section>`;
+}
+
+/* ================= ACTIONS ================= */
+function setLang(l){lang=l;S.settings.lang=l;S.settings.voiceLang=l+'-IN';vstatus='';save();renderAll()}
+function addGuest(name){
+ name=String(name||'').trim().replace(/\s+/g,' ');if(!name)return null;
+ const ex=S.guests.find(g=>g.name.toLowerCase()===name.toLowerCase());if(ex){toast(t('dupGuest'));return ex.name}
+ S.guests.push({id:uid(),name,aliases:''});save();return name;
+}
+function renameGuest(g,v){
+ v=String(v||'').trim().replace(/\s+/g,' ');
+ if(!v||S.guests.some(x=>x!==g&&x.name.toLowerCase()===v.toLowerCase())){if(v)toast(t('dupGuest'));renderSettings();return}
+ const old=g.name;g.name=v;
+ S.entries.forEach(e=>{if(e.guest===old)e.guest=v});S.draft.forEach(e=>{if(e.guest===old)e.guest=v});
+ if(S.settings.lastGuest===old)S.settings.lastGuest=v;if(rf.guest===old)rf.guest=v;save();
+}
+function addTile(id){
+ if(!S.guests.length){toast(t('noGuests'));return}
+ const g=S.settings.lastGuest;if(!g||!guestNames().includes(g)){toast(t('chooseGuest'));return}
+ const it=itemById(id);if(!it)return;
+ const slot=it.meal||slotNow(),d=todayISO();
+ const ex=S.draft.find(o=>o.guest===g&&o.itemId===id&&o.date===d&&o.slot===slot);
+ if(ex)ex.qty=(Number(ex.qty)||0)+1;
+ else S.draft.push({id:uid(),date:d,guest:g,itemId:id,itemName:iname(it,'en'),qty:1,rate:it.rate,slot,note:''});
+ save();toast('+1 '+iname(it)+' · '+g);renderAdd();
+}
+function handleText(txt){
+ const ctx=guestNames().includes(S.settings.lastGuest)?S.settings.lastGuest:'';
+ const res=parse(txt,ctx);
+ if(!res.rows.length){vstatus=`${t('heard')}: “${txt}” — ${t('nothingFound')}`;renderAdd();return}
+ res.rows.forEach(r=>{const it=itemById(r.itemId);S.draft.push({id:uid(),date:r.date,guest:r.guest,itemId:r.itemId,itemName:iname(it,'en'),qty:r.qty,rate:it.rate,slot:r.slot,note:r.note})});
+ if(res.lastGuest)S.settings.lastGuest=res.lastGuest;
+ save();vstatus=`${t('heard')}: “${txt}” → ${t('foundN',{n:res.rows.length})}`;renderAdd();
+ setTimeout(()=>{const p=$('#reviewPanel');if(p)p.scrollIntoView({behavior:'smooth',block:'start'})},60);
+}
+function saveAll(){
+ if(S.draft.some(o=>!o.guest)){toast(t('chooseGuest'));document.querySelector('.drow select.warn')?.scrollIntoView({behavior:'smooth',block:'center'});return}
+ const now=Date.now();
+ S.draft.forEach((o,i)=>{if(!(Number(o.qty)>0))return;const it=itemById(o.itemId);
+  S.entries.push({id:uid(),date:o.date||todayISO(),guest:o.guest,itemId:o.itemId,itemName:it?iname(it,'en'):(o.itemName||''),qty:Number(o.qty),rate:Number(o.rate)||0,amount:amt(o),slot:o.slot||'',note:String(o.note||'').trim(),created:now+i})});
+ S.draft=[];vstatus='';save();toast(t('saved'));renderAdd();window.scrollTo({top:0,behavior:'smooth'});
+}
+function rowObj(el){const row=el.closest('.drow');if(!row)return null;return row.dataset.id==='__edit'?editObj:S.draft.find(o=>o.id===row.dataset.id)}
+function onField(el){
+ const f=el.dataset.f,row=el.closest('.drow'),o=rowObj(el);if(!o)return;
+ let v=el.value;if(f==='qty'||f==='rate')v=v===''?'':Number(v);
+ o[f]=v;
+ if(f==='itemId'){const it=itemById(v);if(it){o.rate=it.rate;o.itemName=iname(it,'en');if(it.meal)o.slot=it.meal;row.querySelector('[data-f=rate]').value=it.rate;row.querySelector('[data-f=slot]').value=o.slot||''}}
+ if(f==='guest')el.classList.toggle('warn',!v);
+ row.querySelector('[data-amt]').textContent=money(amt(o));
+ if(row.dataset.id!=='__edit')save();
+}
+function openEdit(id){
+ const e=S.entries.find(x=>x.id===id);if(!e)return;editObj=clone(e);
+ $('#sheetBody').innerHTML=`<h2>✎ ${t('edit')}</h2><div class="drow" data-id="__edit">${rowFields(editObj,false)}</div>
+  <div class="btn3"><button type="button" class="pbtn" data-act="sheetSave">${t('save')}</button><button type="button" class="dbtn" data-act="sheetDel">${t('del')}</button><button type="button" data-act="sheetClose">${t('cancel')}</button></div>`;
+ $('#sheet').classList.remove('hidden');
+}
+function closeSheet(){$('#sheet').classList.add('hidden');editObj=null}
+function sheetSave(){
+ const o=editObj;if(!o)return;if(!o.guest){toast(t('chooseGuest'));return}
+ if(!(Number(o.qty)>0))return;
+ const it=itemById(o.itemId);
+ Object.assign(o,{qty:Number(o.qty),rate:Number(o.rate)||0,amount:amt(o),note:String(o.note||'').trim(),itemName:it?iname(it,'en'):o.itemName});
+ S.entries=S.entries.map(e=>e.id===o.id?o:e);save();closeSheet();toast(t('saved'));renderRecords();
+}
+function periodText(list){
+ const ds=list.map(e=>e.date).sort();const a=rf.from||ds[0],b=rf.to||ds[ds.length-1];
+ return a===b?fmtDate(a,false,true):`${fmtDate(a,false,true)} – ${fmtDate(b,false,true)}`;
+}
+function byGuest(list){const m=new Map();[...list].sort(cmpAsc).forEach(e=>{const k=e.guest||'—';if(!m.has(k))m.set(k,[]);m.get(k).push(e)});return [...m].sort((a,b)=>a[0].localeCompare(b[0]))}
+function inWords(n){
+ const a=['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
+ const b=['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];
+ const two=x=>x<20?a[x]:b[Math.floor(x/10)]+(x%10?' '+a[x%10]:'');
+ const three=x=>{const h=Math.floor(x/100),r=x%100;return(h?a[h]+' Hundred'+(r?' ':''):'')+(r?two(r):'')};
+ let r=Math.floor(n),p=Math.round((n-r)*100);if(p===100){r++;p=0}
+ const parts=[],cr=Math.floor(r/1e7);r%=1e7;const lk=Math.floor(r/1e5);r%=1e5;const th=Math.floor(r/1000);r%=1000;
+ if(cr)parts.push(three(cr%1000)+' Crore');if(lk)parts.push(two(lk)+' Lakh');if(th)parts.push(two(th)+' Thousand');if(r)parts.push(three(r));
+ return 'Rupees '+(parts.join(' ')||'Zero')+(p?' and '+two(p)+' Paise':'')+' Only';
+}
+function openBill(){
+ const list=filtered();if(!list.length){toast(t('noRecords'));return}
+ billList=list;const groups=byGuest(list);
+ let h=`<div class="paper"><div class="bh"><div>${S.settings.house?`<div class="bhouse">${safe(S.settings.house)}</div>`:''}<div class="btitle">${t('billTitle')}</div></div>
+  <div class="bmeta">${t('date')}: ${fmtDate(todayISO(),false,true)}<br>${t('period')}: ${periodText(list)}</div></div>`;
+ for(const [g,rows] of groups){
+  h+=`<div class="bguest">👤 ${t('guest')}: ${safe(g)}</div><table><thead><tr><th>${t('date')}</th><th>${t('item')}</th><th class="r">${t('qty')}</th><th class="r">${t('rate')}</th><th class="r">${t('amount')}</th></tr></thead><tbody>`;
+  let last='';
+  rows.forEach(e=>{const sub=[e.slot?slotName(e.slot):'',e.note||''].filter(Boolean).map(safe).join(' · ');
+   h+=`<tr><td>${e.date!==last?fmtDate(e.date):''}</td><td>${safe(ename(e))}${sub?`<div class="bsm">${sub}</div>`:''}</td><td class="r">${num(e.qty)}</td><td class="r">${num(e.rate)}</td><td class="r">${num(e.amount)}</td></tr>`;last=e.date});
+  h+=`</tbody><tfoot><tr><td colspan="4">${t('guestTotal')}</td><td class="r">${money(sum(rows))}</td></tr></tfoot></table>`;
+ }
+ const sm=new Map();list.forEach(e=>{const k=ename(e);const v=sm.get(k)||{q:0,a:0};v.q+=Number(e.qty)||0;v.a+=Number(e.amount)||0;sm.set(k,v)});
+ h+=`<div class="bguest">${t('summary')}</div><table><thead><tr><th>${t('item')}</th><th class="r">${t('qty')}</th><th class="r">${t('amount')}</th></tr></thead><tbody>${[...sm].map(([k,v])=>`<tr><td>${safe(k)}</td><td class="r">${num(v.q)}</td><td class="r">${num(v.a)}</td></tr>`).join('')}</tbody></table>`;
+ const tot=sum(list);
+ h+=`<div class="grand"><span>${t('grand')}</span><strong>${money(tot)}</strong></div><div class="words">${t('inWords')}: ${inWords(tot)}</div>
+  <div class="sign"><div>${t('preparedBy')}${S.settings.cook?`: <b>${safe(S.settings.cook)}</b>`:''}</div><div>${t('approvedBy')}</div></div></div>`;
+ $('#billBody').innerHTML=h;$('#bill').classList.remove('hidden');$('#bill').scrollTop=0;
+}
+function shareText(list){
+ const L=[`*${t('billTitle')}*`];if(S.settings.house)L.push(S.settings.house);
+ L.push(`${t('period')}: ${periodText(list)}`);
+ for(const [g,rows] of byGuest(list)){
+  L.push('',`👤 *${g}*`);let last='';
+  rows.forEach(e=>{if(e.date!==last){L.push(`_${fmtDate(e.date,true)}_`);last=e.date}
+   L.push(`• ${ename(e)}${e.slot?' ('+slotName(e.slot)+')':''}: ${num(e.qty)} × ₹${num(e.rate)} = ${money(e.amount)}${e.note?' – '+e.note:''}`)});
+  L.push(`${t('guestTotal')}: *${money(sum(rows))}*`);
+ }
+ L.push('',`*${t('grand')}: ${money(sum(list))}*`);
+ if(S.settings.cook)L.push(`${t('preparedBy')}: ${S.settings.cook}`);
+ return L.join('\n');
+}
+async function doShare(list){
+ if(!list.length){toast(t('noRecords'));return}
+ const text=shareText(list);
+ if(navigator.share){try{await navigator.share({title:t('billTitle'),text});return}catch(e){if(e.name==='AbortError')return}}
+ window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank');
+}
+function download(name,content,type){const blob=new Blob([content],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500)}
+function exportCSV(){
+ const list=filtered().sort(cmpAsc);if(!list.length){toast(t('noRecords'));return}
+ const rows=[['Date','Guest','Item','Time','Quantity','Rate','Amount','Note'],...list.map(e=>[e.date,e.guest,ename(e),slotName(e.slot),e.qty,e.rate,e.amount,e.note||''])];
+ rows.push(['','','','','','TOTAL',sum(list),'']);
+ const csv='\ufeff'+rows.map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');
+ download(`bolo-bill-${rf.from||'start'}-to-${rf.to||'end'}.csv`,csv,'text/csv;charset=utf-8');
+}
+function doRestore(file){
+ if(!file)return;const r=new FileReader();
+ r.onload=()=>{try{
+   const d=JSON.parse(r.result);let next;
+   if(d&&d.version===2&&Array.isArray(d.entries))next=d;
+   else if(d&&Array.isArray(d.entries)){next=fresh();next.entries=migrateOld(d.entries)}
+   else throw new Error('bad');
+   if(!confirm(t('restoreConfirm')))return;
+   S=normalize(next);lang=S.settings.lang||lang;save();renderAll();toast(t('restored'));
+  }catch(e){toast(t('badFile'))}};
+ r.readAsText(file);
+}
+
+/* ================= VOICE ================= */
+function startVoice(){
+ if(!SR){toast(t('noVoice'));return}
+ if(!window.isSecureContext){vstatus=t('needLink');$('#vstatus').textContent=vstatus;return}
+ if(listening&&rec){rec.stop();return}
+ try{rec=new SR()}catch(e){toast(t('noVoice'));return}
+ rec.lang=S.settings.voiceLang;rec.interimResults=true;rec.continuous=false;rec.maxAlternatives=1;
+ let finalText='';const box=$('#vtext');const base=box?box.value.trim():'';
+ rec.onstart=()=>{listening=true;vstatus='';const m=document.querySelector('.mic');if(m)m.classList.add('live');$('#vstatus').textContent=t('listening')};
+ rec.onresult=ev=>{let interim='';for(let i=ev.resultIndex;i<ev.results.length;i++){const x=ev.results[i];if(x.isFinal)finalText+=x[0].transcript+' ';else interim+=x[0].transcript}const b=$('#vtext');if(b)b.value=(base+' '+finalText+interim).trim()};
+ rec.onerror=ev=>{if(ev.error==='not-allowed'||ev.error==='service-not-allowed')vstatus=window.isSecureContext?t('voiceDenied'):t('needLink');else if(ev.error==='network')vstatus=t('voiceNet');else if(ev.error!=='no-speech'&&ev.error!=='aborted')vstatus=ev.error;$('#vstatus').textContent=vstatus};
+ rec.onend=()=>{listening=false;const m=document.querySelector('.mic');if(m)m.classList.remove('live');
+  const b=$('#vtext');const txt=b?b.value.trim():'';
+  if(finalText.trim()&&txt){b.value='';handleText(txt)}else if(!vstatus)$('#vstatus').textContent=t('mic')};
+ try{rec.start()}catch(e){listening=false}
+}
+
+/* ================= EVENTS ================= */
+document.addEventListener('click',e=>{
+ if(e.target.id==='sheet'){closeSheet();return}
+ const b=e.target.closest('[data-act]');if(!b)return;
+ const a=b.dataset.act;
+ switch(a){
+  case 'nav':showPage(b.dataset.p);break;
+  case 'lang':{const i=LANGS.findIndex(x=>x[0]===lang);setLang(LANGS[(i+1)%LANGS.length][0]);break}
+  case 'setLang':setLang(b.dataset.l);break;
+  case 'vlang':S.settings.voiceLang=b.dataset.v;save();renderAdd();break;
+  case 'mic':startVoice();break;
+  case 'parseText':{const box=$('#vtext');const txt=box.value.trim();if(txt){box.value='';handleText(txt)}break}
+  case 'pickGuest':S.settings.lastGuest=b.dataset.name;save();renderAdd();break;
+  case 'quickGuest':{const n=prompt(t('guestPh'));const nm=addGuest(n);if(nm){S.settings.lastGuest=nm;save();renderAdd()}break}
+  case 'tile':addTile(b.dataset.id);break;
+  case 'ddel':{const o=rowObj(b);S.draft=S.draft.filter(x=>x!==o);save();renderAdd();break}
+  case 'minus':case 'plus':{const o=rowObj(b);if(!o)return;let q=Number(o.qty)||0;q=a==='plus'?q+1:Math.max(1,q-1);o.qty=q;const row=b.closest('.drow');row.querySelector('[data-f=qty]').value=q;row.querySelector('[data-amt]').textContent=money(amt(o));if(row.dataset.id!=='__edit')save();break}
+  case 'saveAll':saveAll();break;
+  case 'clearDraft':if(confirm(t('clearAll')+'?')){S.draft=[];save();renderAdd()}break;
+  case 'openEdit':openEdit(b.dataset.id);break;
+  case 'sheetSave':sheetSave();break;
+  case 'sheetDel':if(editObj&&confirm(t('confirmDel'))){S.entries=S.entries.filter(x=>x.id!==editObj.id);save();closeSheet();renderRecords()}break;
+  case 'sheetClose':closeSheet();break;
+  case 'preset':{const td=todayISO();const p=b.dataset.p;if(p==='today'){rf.from=rf.to=td}else if(p==='month'){rf.from=td.slice(0,8)+'01';rf.to=td}else{rf.from=rf.to=''}renderRecords();break}
+  case 'bill':openBill();break;
+  case 'share':doShare(filtered());break;
+  case 'csv':exportCSV();break;
+  case 'billPrint':window.print();break;
+  case 'billShare':doShare(billList);break;
+  case 'billClose':$('#bill').classList.add('hidden');break;
+  case 'gadd':{const el=$('#newGuest');if(addGuest(el.value)){el.value='';renderSettings()}break}
+  case 'gdel':{const id=b.closest('[data-gid]').dataset.gid;const g=S.guests.find(x=>x.id===id);if(g&&confirm(t('removeGuest'))){S.guests=S.guests.filter(x=>x!==g);if(S.settings.lastGuest===g.name)S.settings.lastGuest='';save();renderSettings()}break}
+  case 'iadd':{const n=$('#newItem').value.trim();if(!n)return;S.items.push({id:'i'+uid(),icon:'🍽️',rate:Math.max(0,Number($('#newItemRate').value)||0),name:{en:n,hi:n,gu:n},keys:''});save();renderSettings();break}
+  case 'idel':{const id=b.closest('[data-iid]').dataset.iid;const it=itemById(id);if(it&&confirm(t('removeItem')+'\n'+iname(it))){S.items=S.items.filter(x=>x!==it);S.draft=S.draft.filter(o=>o.itemId!==id);save();renderSettings()}break}
+  case 'backup':download(`bolo-bill-backup-${todayISO()}.json`,JSON.stringify(Object.assign({},S,{exportedAt:new Date().toISOString()}),null,1),'application/json');break;
+  case 'restore':$('#restoreFile').click();break;
+ }
+});
+document.addEventListener('input',e=>{if(e.target.dataset.f)onField(e.target)});
+document.addEventListener('change',e=>{
+ const el=e.target;
+ if(el.dataset.f){onField(el);return}
+ if(el.dataset.g){const g=S.guests.find(x=>x.id===el.closest('[data-gid]').dataset.gid);if(!g)return;if(el.dataset.g==='name')renameGuest(g,el.value);else{g.aliases=el.value;save()}return}
+ if(el.dataset.i){const it=itemById(el.closest('[data-iid]').dataset.iid);if(!it)return;const k=el.dataset.i;
+  if(k==='name'){const v=el.value.trim();if(v)it.name[lang]=v;else el.value=iname(it)}else if(k==='rate')it.rate=Math.max(0,Number(el.value)||0);else it.keys=el.value;save();return}
+ if(el.dataset.s){S.settings[el.dataset.s]=el.value.trim();save();return}
+ if(el.id==='restoreFile'){doRestore(el.files[0]);el.value='';return}
+ if(el.id==='recGuest'){rf.guest=el.value;renderRecords()}
+ else if(el.id==='recFrom'){rf.from=el.value;renderRecords()}
+ else if(el.id==='recTo'){rf.to=el.value;renderRecords()}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='newGuest'){e.preventDefault();$('[data-act=gadd]').click()}});
+
+/* ================= START ================= */
+load();
+lang=S.settings.lang||'hi';
+{const td=todayISO();rf.from=td.slice(0,8)+'01';rf.to=td}
+renderAll();
+</script>
+</body>
+</html>
