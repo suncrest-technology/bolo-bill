@@ -42,6 +42,7 @@ main{max-width:720px;margin:0 auto;padding:12px}
 @media(min-width:560px){.tiles{grid-template-columns:repeat(4,1fr)}}
 label.l{display:block;font-size:13px;font-weight:700;color:var(--mut);margin:0 0 5px}
 select,input{width:100%;min-height:46px;border:1px solid var(--field);border-radius:10px;padding:8px 10px;background:#fff}
+select,input,textarea{min-width:0;max-width:100%}.filters>div,.kform>*,.rf3>label,.rf2b>label{min-width:0}
 input:focus,select:focus,textarea:focus{outline:2px solid #F8C36A;border-color:var(--g)}
 .warn{border-color:#E8A33A!important;background:var(--amber)!important}
 .drow{border:1px solid var(--line);border-radius:14px;padding:10px;margin-top:10px;background:#FBFCFC}
@@ -56,8 +57,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid #F8C36A;border-color:v
 .full{width:100%;margin-top:8px}
 .empty{text-align:center;padding:18px 8px;color:var(--mut);font-size:14px}
 .pbtn{background:var(--acc);color:var(--on)}.dbtn{background:var(--red2);color:var(--red)}
-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);padding:6px 6px calc(6px + env(safe-area-inset-bottom));z-index:6}
-nav button{background:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:13px;color:var(--mut);padding:6px;position:relative}
+nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:6px 6px calc(6px + env(safe-area-inset-bottom));z-index:6}
+nav button{background:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:12.5px;color:var(--mut);padding:6px;position:relative}
 nav button span{font-size:22px}nav button.on{color:var(--g)}
 nav .badge{position:absolute;top:2px;right:calc(50% - 26px);background:#c0392b;color:#fff;border-radius:999px;font-size:11px;min-width:18px;padding:1px 5px}
 .filters{display:grid;grid-template-columns:1fr 1fr;gap:8px}.filters .wide{grid-column:1/-1}
@@ -76,8 +77,9 @@ nav .badge{position:absolute;top:2px;right:calc(50% - 26px);background:#c0392b;c
 .sheet{background:#fff;border-radius:18px 18px 0 0;padding:16px 14px calc(16px + env(safe-area-inset-bottom));width:100%;max-width:720px;max-height:92vh;overflow:auto}
 .sheet h2{margin:0 0 6px;font-size:18px}
 #bill{position:fixed;inset:0;background:#E9ECEF;z-index:30;overflow:auto}
-.billbar{position:sticky;top:0;display:flex;gap:8px;padding:10px;background:#fff;border-bottom:1px solid var(--line)}
-.billbar button{flex:1;font-size:15px;padding:12px 6px}
+.billbar{position:sticky;top:0;padding:10px;background:#fff;border-bottom:1px solid var(--line);z-index:2}
+.bbtns{display:flex;gap:8px}.bbtns button{flex:1;font-size:15px;padding:12px 6px}
+#billChips{margin-top:8px;align-items:center}#billChips:empty{display:none}#billChips .cl{flex:none;font-size:13px;font-weight:700;color:var(--mut)}
 .paper{background:#fff;max-width:760px;margin:12px auto;padding:20px 18px;font-size:14px;color:#111}
 .bh{display:flex;justify-content:space-between;gap:12px;border-bottom:3px solid var(--g);padding-bottom:10px}
 .bhouse{font-size:20px;font-weight:800;color:var(--g)}.btitle{font-size:16px;font-weight:700;margin-top:2px}.bmeta{font-size:12px;text-align:right;color:#444;line-height:1.6}
@@ -91,6 +93,19 @@ nav .badge{position:absolute;top:2px;right:calc(50% - 26px);background:#c0392b;c
 .toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 16px;border-radius:12px;font-size:15px;z-index:40;opacity:0;transition:opacity .2s;pointer-events:none;max-width:90vw;text-align:center}
 .toast.show{opacity:1}
 .hidden{display:none!important}
+.tile.tx{border:1.5px dashed var(--g);background:var(--g2);color:var(--g)}
+.rf2b{display:grid;grid-template-columns:1fr 1fr;gap:8px}.rf2b label{font-size:12px;color:var(--mut);font-weight:700}
+.chk{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:600;margin-top:4px}.chk input{width:22px;height:22px;min-height:0;flex:none}
+.gtot div{align-items:center}.gtot .gth{font-weight:800;color:var(--mut);font-size:13px;border:0!important;padding-top:10px}
+.mini{padding:7px 10px;font-size:13px;margin-left:8px;background:var(--g2);color:var(--g)}
+.bwho{font-size:15px;margin-top:4px}
+.b2{grid-template-columns:1fr 1fr}
+.kcats{display:flex;flex-wrap:wrap;gap:8px}
+.kform{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.kform #kDesc{grid-column:1/-1}
+.mic.kmic{width:78px;height:78px;font-size:32px;margin-top:8px}
+.wk{border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-top:12px}
+.wkh{display:flex;justify-content:space-between;gap:8px;font-weight:800;font-size:14px;color:#4A3A12;border-bottom:2px solid var(--g3);padding-bottom:6px}.wkh b{color:var(--g)}
+.wkb{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:10px}.wkb button{padding:10px 12px;font-size:14px}
 @media print{
  body{padding:0;background:#fff}
  header,main,nav,.overlay,.toast,.billbar{display:none!important}
@@ -107,17 +122,19 @@ nav .badge{position:absolute;top:2px;right:calc(50% - 26px);background:#c0392b;c
 <main>
  <div id="pageAdd"></div>
  <div id="pageRecords" class="hidden"></div>
+ <div id="pageKharcha" class="hidden"></div>
  <div id="pageSettings" class="hidden"></div>
  <footer class="foot"><a href="https://www.suncrest.tech" target="_blank" rel="noopener"><svg viewBox="422.04 498.50 491.76 491.76" aria-hidden="true"><path fill="#F5A623" fill-rule="evenodd" d="M434.04 744.38a233.88 233.88 0 1 0 467.76 0a233.88 233.88 0 1 0 -467.76 0zM622.20 588.56L823.80 588.56L715.08 666.44L513.48 666.44zM511.08 682.04L712.68 682.04L824.76 806.84L623.16 806.84zM620.76 822.44L822.36 822.44L713.64 900.32L512.04 900.32z"/></svg>Bolo Bill by Suncrest · www.suncrest.tech</a></footer>
 </main>
 <nav>
  <button type="button" data-act="nav" data-p="add" id="navAdd"><span>➕</span><b></b></button>
  <button type="button" data-act="nav" data-p="records" id="navRecords"><span>📋</span><b></b></button>
+ <button type="button" data-act="nav" data-p="kharcha" id="navKharcha"><span>💰</span><b></b></button>
  <button type="button" data-act="nav" data-p="settings" id="navSettings"><span>⚙️</span><b></b></button>
 </nav>
 <div id="sheet" class="overlay hidden"><div class="sheet" id="sheetBody"></div></div>
 <div id="bill" class="hidden">
- <div class="billbar"><button type="button" class="pbtn" data-act="billPrint" id="bPrint"></button><button type="button" data-act="billShare" id="bShare"></button><button type="button" data-act="billClose" id="bClose"></button></div>
+ <div class="billbar"><div class="bbtns"><button type="button" class="pbtn" data-act="billPrint" id="bPrint"></button><button type="button" data-act="billShare" id="bShare"></button><button type="button" data-act="billClose" id="bClose"></button></div><div class="chips" id="billChips"></div></div>
  <div id="billBody"></div>
 </div>
 <div class="toast" id="toast"></div>
@@ -186,6 +203,24 @@ privacy:'બધો ડેટા આ ફોનમાં જ રહે છે. દ
 billTitle:'જમવા અને નાસ્તાનું બિલ',period:'સમયગાળો',preparedBy:'બનાવનાર',approvedBy:'મંજૂર',summary:'આઇટમ સારાંશ',grand:'કુલ રકમ',inWords:'શબ્દોમાં',guestTotal:'મહેમાનનો કુલ',
 print:'🖨 પ્રિન્ટ / PDF',close:'✕ બંધ',noRecords:'મોકલવા માટે કોઈ એન્ટ્રી નથી.',storageFull:'સેવ ન થયું – ફોનનું સ્ટોરેજ ભરાઈ ગયું છે. બેકઅપ સેવ કરો.'}
 };
+Object.assign(T.en,{tabKharcha:'Kharcha',extraItem:'Extra item',extraTitle:'Add an extra item',itemName:'Item name (e.g. curd, extra milk)',addToCard:'Also save it in the rate card',addToList:'Add to list',needName:'Write the item name',
+forWhom:'For',allLedger:'All guests (for owner)',ledgerTitle:'Guest Ledger',stmtTitle:'Guest Statement',guestSummary:'Guest-wise summary',entries:'Entries',running:'Running total',sendGuest:'Statement',
+kitchenExp:'Kitchen expenses (paid by cook)',amountDue:'Amount payable',guestCharges:'Total guest charges',
+kTitle:'My kitchen expenses',kSpeakPh:'e.g. “vegetables 250, milk 60, gas 900”',kHint:'Say or type each thing and its amount. Words like “today” or “yesterday” set the date.',kWhat:'Expense',kDesc:'Details (optional), e.g. potato, onion',kAmount:'Amount ₹',kAdd:'Add expense',
+kAdded:'{n} expenses added ✓ Tap one below to change it.',kNone:'No amount understood. Say it like: vegetables 250',kNeedAmt:'Enter the amount',thisWeek:'This week',lastMonth:'Last month',week:'Week',weekTotal:'Week total',
+kEmpty:'No expenses for this period.',kStmt:'Kitchen Expense Statement',kWeekly:'Week-wise expenses',weekStmt:'Week statement',kEdit:'Edit expense'});
+Object.assign(T.hi,{tabKharcha:'खर्चा',extraItem:'अतिरिक्त आइटम',extraTitle:'अतिरिक्त आइटम जोड़ें',itemName:'आइटम का नाम (जैसे दही, एक्स्ट्रा दूध)',addToCard:'रेट कार्ड में भी सेव करें',addToList:'सूची में जोड़ें',needName:'आइटम का नाम लिखें',
+forWhom:'किसके लिए',allLedger:'सभी मेहमान (मालिक के लिए)',ledgerTitle:'मेहमान खाता',stmtTitle:'मेहमान का हिसाब',guestSummary:'मेहमान-वार सारांश',entries:'एंट्री',running:'चालू कुल',sendGuest:'हिसाब',
+kitchenExp:'रसोई खर्च (रसोइये ने दिया)',amountDue:'देय राशि',guestCharges:'मेहमानों का कुल',
+kTitle:'मेरा रसोई खर्च',kSpeakPh:'जैसे: “सब्ज़ी 250, दूध 60, गैस 900”',kHint:'हर चीज़ और उसकी रकम बोलें या लिखें। “आज” या “कल” बोलने से तारीख लग जाएगी।',kWhat:'खर्च',kDesc:'विवरण (ज़रूरी नहीं), जैसे आलू, प्याज़',kAmount:'रकम ₹',kAdd:'खर्च जोड़ें',
+kAdded:'{n} खर्च जुड़ गए ✓ बदलने के लिए नीचे उस पर दबाएँ।',kNone:'रकम समझ नहीं आई। ऐसे बोलें: सब्ज़ी 250',kNeedAmt:'रकम डालें',thisWeek:'इस हफ़्ते',lastMonth:'पिछला महीना',week:'हफ़्ता',weekTotal:'हफ़्ते का कुल',
+kEmpty:'इस समय का कोई खर्च नहीं।',kStmt:'रसोई खर्च विवरण',kWeekly:'हफ़्तेवार खर्च',weekStmt:'हफ़्ते का विवरण',kEdit:'खर्च बदलें'});
+Object.assign(T.gu,{tabKharcha:'ખર્ચ',extraItem:'વધારાની આઇટમ',extraTitle:'વધારાની આઇટમ ઉમેરો',itemName:'આઇટમનું નામ (જેમ કે દહીં, વધારાનું દૂધ)',addToCard:'ભાવ પત્રકમાં પણ સેવ કરો',addToList:'યાદીમાં ઉમેરો',needName:'આઇટમનું નામ લખો',
+forWhom:'કોના માટે',allLedger:'બધા મહેમાન (માલિક માટે)',ledgerTitle:'મહેમાન ખાતું',stmtTitle:'મહેમાનનો હિસાબ',guestSummary:'મહેમાન પ્રમાણે સારાંશ',entries:'એન્ટ્રી',running:'ચાલુ કુલ',sendGuest:'હિસાબ',
+kitchenExp:'રસોડા ખર્ચ (રસોઇયાએ ચૂકવ્યો)',amountDue:'ચૂકવવાની રકમ',guestCharges:'મહેમાનોનો કુલ',
+kTitle:'મારો રસોડા ખર્ચ',kSpeakPh:'જેમ કે: “શાક 250, દૂધ 60, ગેસ 900”',kHint:'દરેક વસ્તુ અને તેની રકમ બોલો કે લખો. “આજે” કે “ગઈકાલે” બોલવાથી તારીખ લાગી જશે.',kWhat:'ખર્ચ',kDesc:'વિગત (જરૂરી નથી), જેમ કે બટાકા, ડુંગળી',kAmount:'રકમ ₹',kAdd:'ખર્ચ ઉમેરો',
+kAdded:'{n} ખર્ચ ઉમેરાયા ✓ બદલવા નીચે તેના પર દબાવો.',kNone:'રકમ સમજાઈ નહીં. આમ બોલો: શાક 250',kNeedAmt:'રકમ નાખો',thisWeek:'આ અઠવાડિયે',lastMonth:'ગયો મહિનો',week:'અઠવાડિયું',weekTotal:'અઠવાડિયાનો કુલ',
+kEmpty:'આ સમયગાળામાં કોઈ ખર્ચ નથી.',kStmt:'રસોડા ખર્ચ પત્રક',kWeekly:'અઠવાડિયા પ્રમાણે ખર્ચ',weekStmt:'અઠવાડિયાનું પત્રક',kEdit:'ખર્ચ બદલો'});
 const LANGS=[['hi','हिंदी'],['gu','ગુજરાતી'],['en','English']];
 const VLANGS=[['hi-IN','हिंदी'],['gu-IN','ગુજરાતી'],['en-IN','English']];
 const LOCALE={en:'en-IN',hi:'hi-IN',gu:'gu-IN'};
@@ -213,6 +248,8 @@ const DEFAULT_ITEMS=[
  {id:'milk',icon:'🥛',rate:20,name:{en:'Milk',hi:'दूध',gu:'દૂધ'},keys:'milk, doodh, dudh, haldi doodh, bournvita'},
  {id:'eggs',icon:'🥚',rate:15,name:{en:'Eggs',hi:'अंडे',gu:'ઈંડા'},keys:'egg, eggs, anda, ande, andaa, inda, enda, eenda, omelette, omelet, omlet, amlet, bhurji, boiled egg, egg bhurji'},
  {id:'snacks',icon:'🥪',rate:10,name:{en:'Snacks',hi:'स्नैक्स',gu:'ફરસાણ'},keys:'snack, snacks, samosa, kachori, pakoda, pakora, bhajiya, bhajia, dhokla, khaman, biscuit, biscuits, biskit, namkeen, chips, sev, vada pav, vadapav, sandwich, toast, maggi, khakhra, farsan'},
+ {id:'curd',icon:'🥣',rate:20,name:{en:'Curd',hi:'दही',gu:'દહીં'},keys:'curd, dahi, dahee, dahin, raita, raitu, yogurt'},
+ {id:'buttermilk',icon:'🥤',rate:15,name:{en:'Buttermilk',hi:'छाछ',gu:'છાશ'},keys:'buttermilk, chaas, chhas, chhachh, chhaachh, chaach, lassi, mattha'},
  {id:'other',icon:'🛒',rate:0,name:{en:'Other',hi:'अन्य',gu:'અન્ય'},keys:''}
 ];
 let S=null; // app state
@@ -382,14 +419,17 @@ function migrateOld(old){
 }
 function fresh(){
  const l=(navigator.language||'').toLowerCase().startsWith('gu')?'gu':'hi';
- return {version:2,guests:[],items:clone(DEFAULT_ITEMS),entries:[],draft:[],settings:{lang:l,voiceLang:l+'-IN',house:'',cook:'',lastGuest:''}};
+ return {version:2,guests:[],items:clone(DEFAULT_ITEMS),entries:[],draft:[],expenses:[],settings:{lang:l,voiceLang:l+'-IN',house:'',cook:'',lastGuest:'',itemsV:2}};
 }
 function normalize(s){
  const f=fresh();
  s=s&&typeof s==='object'?s:{};
  s.version=2;
  s.guests=Array.isArray(s.guests)?s.guests.filter(g=>g&&g.name).map(g=>({id:g.id||uid(),name:String(g.name),aliases:g.aliases||''})):[];
- s.items=Array.isArray(s.items)&&s.items.length?s.items:f.items;
+ const hadItems=Array.isArray(s.items)&&s.items.length,itemsV=(s.settings&&s.settings.itemsV)||1;
+ s.items=hadItems?s.items:f.items;
+ if(hadItems&&itemsV<2)['curd','buttermilk'].forEach(id=>{if(!s.items.some(i=>i.id===id)){const k=s.items.findIndex(i=>i.id==='other');s.items.splice(k<0?s.items.length:k,0,clone(DEFAULT_ITEMS.find(i=>i.id===id)))}});
+ s.expenses=Array.isArray(s.expenses)?s.expenses.filter(x=>x&&x.date&&Number(x.amount)>0):[];
  s.entries=Array.isArray(s.entries)?s.entries:[];
  s.draft=Array.isArray(s.draft)?s.draft:[];
  s.settings=Object.assign(f.settings,s.settings||{});
@@ -407,7 +447,7 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){toast(t
 
 /* ================= UI HELPERS ================= */
 const $=s=>document.querySelector(s);
-let lang='hi',page='add',vstatus='',listening=false,rec=null,editObj=null,billList=[];
+let lang='hi',page='add',vstatus='',kstatus='',listening=false,rec=null,editObj=null,editK=null,kCat='veg',kRange='month',billMode='guest',billGuest='all',billK=['',''];
 const rf={guest:'all',from:'',to:''};
 function t(k,v){let s=(T[lang]&&T[lang][k])||T.en[k]||k;if(v)for(const x in v)s=s.replace('{'+x+'}',v[x]);return s}
 function safe(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
@@ -416,7 +456,7 @@ const num=n=>new Intl.NumberFormat('en-IN',{maximumFractionDigits:2}).format(Num
 const amt=o=>Math.round((Number(o.qty)||0)*(Number(o.rate)||0)*100)/100;
 const sum=l=>Math.round(l.reduce((s,e)=>s+(Number(e.amount)||0),0)*100)/100;
 function iname(it,l){l=l||lang;const n=(it&&it.name)||{};return n[l]||n.en||Object.values(n).find(Boolean)||(it&&it.id)||''}
-const ename=e=>{const it=itemById(e.itemId);return it?iname(it):(e.itemName||e.itemId)};
+const ename=e=>{if(e.custom)return e.custom;const it=itemById(e.itemId);return it?iname(it):(e.itemName||e.itemId)};
 const icon=e=>(itemById(e.itemId)||{}).icon||'🍽️';
 const slotName=s=>s?t(s):'';
 function fmtDate(iso,wd,yr){if(!iso)return'';try{return new Date(iso+'T00:00:00').toLocaleDateString(LOCALE[lang],Object.assign({day:'numeric',month:'short'},wd?{weekday:'short'}:{},yr?{year:'numeric'}:{}))}catch(e){return iso}}
@@ -436,6 +476,7 @@ const slotOptions=sel=>`<option value="">—</option>`+SLOTS.map(s=>`<option val
 function rowFields(o,isDraft){
  return `<div class="rf">
   <div class="rowhead"><select data-f="itemId" aria-label="${t('item')}">${itemOptions(o.itemId,o.itemName)}</select>${isDraft?`<button type="button" class="x" data-act="ddel" aria-label="${t('del')}">✕</button>`:''}</div>
+  ${o.itemId==='other'?`<input data-f="custom" maxlength="40" class="${o.custom?'':'warn'}" placeholder="${t('itemName')}" value="${safe(o.custom||'')}">`:''}
   <div class="rf2"><select data-f="guest" class="${o.guest?'':'warn'}" aria-label="${t('guest')}">${guestOptions(o.guest)}</select>
    <div class="stepper"><button type="button" data-act="minus">−</button><input data-f="qty" type="number" inputmode="decimal" min="0" step="any" value="${safe(o.qty)}" aria-label="${t('qty')}"><button type="button" data-act="plus">+</button></div></div>
   <div class="rf3"><label>${t('rate')}<input data-f="rate" type="number" inputmode="decimal" min="0" step="any" value="${safe(o.rate)}"></label>
@@ -451,14 +492,14 @@ function renderAll(){
  document.documentElement.lang=lang;
  $('#hTitle').textContent=t('title');$('#hSub').textContent=t('subtitle');
  const cur=LANGS.find(x=>x[0]===lang);$('#langBtn').textContent='🌐 '+cur[1];
- $('#navAdd b').textContent=t('tabAdd');$('#navRecords b').textContent=t('tabRecords');$('#navSettings b').textContent=t('tabSettings');
+ $('#navAdd b').textContent=t('tabAdd');$('#navRecords b').textContent=t('tabRecords');$('#navKharcha b').textContent=t('tabKharcha');$('#navSettings b').textContent=t('tabSettings');
  $('#bPrint').textContent=t('print');$('#bShare').textContent=t('shareW');$('#bClose').textContent=t('close');
  renderPage();
 }
 function renderPage(){
- ['add','records','settings'].forEach(p=>{$('#page'+p[0].toUpperCase()+p.slice(1)).classList.toggle('hidden',p!==page);$('#nav'+p[0].toUpperCase()+p.slice(1)).classList.toggle('on',p===page)});
+ ['add','records','kharcha','settings'].forEach(p=>{$('#page'+p[0].toUpperCase()+p.slice(1)).classList.toggle('hidden',p!==page);$('#nav'+p[0].toUpperCase()+p.slice(1)).classList.toggle('on',p===page)});
  const nb=$('#navAdd');let b=nb.querySelector('.badge');if(S.draft.length&&page!=='add'){if(!b){b=document.createElement('i');b.className='badge';nb.appendChild(b)}b.textContent=S.draft.length}else if(b)b.remove();
- if(page==='add')renderAdd();else if(page==='records')renderRecords();else renderSettings();
+ if(page==='add')renderAdd();else if(page==='records')renderRecords();else if(page==='kharcha')renderKharcha();else renderSettings();
 }
 function showPage(p){page=p;renderPage();window.scrollTo(0,0)}
 
@@ -471,7 +512,7 @@ function renderAdd(){
  <section class="panel voice">
   <h2>🎤 ${t('speakTitle')}</h2>
   <div class="chips center">${VLANGS.map(([v,n])=>`<button type="button" class="chip ${S.settings.voiceLang===v?'on':''}" data-act="vlang" data-v="${v}">${n}</button>`).join('')}</div>
-  ${SR?`<button type="button" class="mic ${listening?'live':''}" data-act="mic" aria-label="${t('mic')}">🎤</button>`:''}
+  ${SR?`<button type="button" class="mic ${listening&&page==='add'?'live':''}" data-act="mic" aria-label="${t('mic')}">🎤</button>`:''}
   <div class="status" id="vstatus">${safe(vstatus||(listening?t('listening'):(SR?t('mic'):t('noVoice'))))}</div>
   <div class="vrow"><textarea id="vtext" rows="2" placeholder="${t('typePh')}"></textarea><button type="button" data-act="parseText">${t('understand')}</button></div>
   <div class="hint">${t('speakHint')}</div>
@@ -481,7 +522,7 @@ function renderAdd(){
   <label class="l">${t('guest')}</label>
   <div class="chips">${S.guests.map(x=>`<button type="button" class="chip ${x.name===g?'on':''}" data-act="pickGuest" data-name="${safe(x.name)}">${safe(x.name)}</button>`).join('')}<button type="button" class="chip" data-act="quickGuest">${t('addGuest')}</button></div>
   ${S.guests.length?'':`<div class="hint">${t('noGuests')}</div>`}
-  <div class="tiles">${S.items.map(it=>`<button type="button" class="tile" data-act="tile" data-id="${safe(it.id)}"><span class="ic">${it.icon||'🍽️'}</span>${safe(iname(it))}<small>${money(it.rate)}</small></button>`).join('')}</div>
+  <div class="tiles">${S.items.map(it=>`<button type="button" class="tile" data-act="tile" data-id="${safe(it.id)}"><span class="ic">${it.icon||'🍽️'}</span>${safe(iname(it))}<small>${money(it.rate)}</small></button>`).join('')}<button type="button" class="tile tx" data-act="extra"><span class="ic">➕</span>${t('extraItem')}</button></div>
  </section>
  <section class="panel" id="reviewPanel">
   <h2>✅ ${t('reviewTitle')}</h2>
@@ -500,7 +541,7 @@ function renderRecords(){
  const names=[...new Set([...guestNames(),...S.entries.map(e=>e.guest).filter(Boolean)])].sort((a,b)=>a.localeCompare(b));
  const days=[];let cur=null;for(const e of list){if(!cur||cur.date!==e.date){cur={date:e.date,items:[]};days.push(cur)}cur.items.push(e)}
  let gt='';
- if(rf.guest==='all'&&list.length){const m=new Map();list.forEach(e=>m.set(e.guest,(m.get(e.guest)||0)+(Number(e.amount)||0)));if(m.size>1)gt=`<div class="gtot">${[...m].sort((a,b)=>b[1]-a[1]).map(([g,v])=>`<div><span>👤 ${safe(g||'—')}</span><b>${money(v)}</b></div>`).join('')}</div>`}
+ if(rf.guest==='all'&&list.length){const m=new Map();list.forEach(e=>m.set(e.guest,(m.get(e.guest)||0)+(Number(e.amount)||0)));gt=`<div class="gtot"><div class="gth">${t('guestSummary')}</div>${[...m].sort((a,b)=>b[1]-a[1]).map(([g,v])=>`<div><span>👤 ${safe(g||'—')}</span><span><b>${money(v)}</b><button type="button" class="mini" data-act="guestBill" data-g="${safe(g||'—')}">🧾 ${t('sendGuest')}</button></span></div>`).join('')}</div>`}
  const td=todayISO(),ms=td.slice(0,8)+'01';
  const pre=rf.from===td&&rf.to===td?'today':rf.from===ms&&rf.to===td?'month':!rf.from&&!rf.to?'all':'';
  $('#pageRecords').innerHTML=`<section class="panel"><h2>📋 ${t('records')}</h2>
@@ -543,7 +584,7 @@ function renderSettings(){
 }
 
 /* ================= ACTIONS ================= */
-function setLang(l){lang=l;S.settings.lang=l;S.settings.voiceLang=l+'-IN';vstatus='';save();renderAll()}
+function setLang(l){lang=l;S.settings.lang=l;S.settings.voiceLang=l+'-IN';vstatus='';kstatus='';save();renderAll()}
 function addGuest(name){
  name=String(name||'').trim().replace(/\s+/g,' ');if(!name)return null;
  const ex=S.guests.find(g=>g.name.toLowerCase()===name.toLowerCase());if(ex){toast(t('dupGuest'));return ex.name}
@@ -578,8 +619,9 @@ function handleText(txt){
 function saveAll(){
  if(S.draft.some(o=>!o.guest)){toast(t('chooseGuest'));document.querySelector('.drow select.warn')?.scrollIntoView({behavior:'smooth',block:'center'});return}
  const now=Date.now();
+ if(S.draft.some(o=>o.itemId==='other'&&!String(o.custom||'').trim())){toast(t('needName'));document.querySelector('.drow input[data-f=custom].warn')?.scrollIntoView({behavior:'smooth',block:'center'});return}
  S.draft.forEach((o,i)=>{if(!(Number(o.qty)>0))return;const it=itemById(o.itemId);
-  S.entries.push({id:uid(),date:o.date||todayISO(),guest:o.guest,itemId:o.itemId,itemName:it?iname(it,'en'):(o.itemName||''),qty:Number(o.qty),rate:Number(o.rate)||0,amount:amt(o),slot:o.slot||'',note:String(o.note||'').trim(),created:now+i})});
+  S.entries.push({id:uid(),date:o.date||todayISO(),guest:o.guest,itemId:o.itemId,itemName:it?iname(it,'en'):(o.itemName||''),custom:o.itemId==='other'?String(o.custom||'').trim():'',qty:Number(o.qty),rate:Number(o.rate)||0,amount:amt(o),slot:o.slot||'',note:String(o.note||'').trim(),created:now+i})});
  S.draft=[];vstatus='';save();toast(t('saved'));renderAdd();window.scrollTo({top:0,behavior:'smooth'});
 }
 function rowObj(el){const row=el.closest('.drow');if(!row)return null;return row.dataset.id==='__edit'?editObj:S.draft.find(o=>o.id===row.dataset.id)}
@@ -587,7 +629,8 @@ function onField(el){
  const f=el.dataset.f,row=el.closest('.drow'),o=rowObj(el);if(!o)return;
  let v=el.value;if(f==='qty'||f==='rate')v=v===''?'':Number(v);
  o[f]=v;
- if(f==='itemId'){const it=itemById(v);if(it){o.rate=it.rate;o.itemName=iname(it,'en');if(it.meal)o.slot=it.meal;row.querySelector('[data-f=rate]').value=it.rate;row.querySelector('[data-f=slot]').value=o.slot||''}}
+ if(f==='itemId'){const it=itemById(v);if(it){o.rate=it.rate;o.itemName=iname(it,'en');if(it.meal)o.slot=it.meal}if(v!=='other')o.custom='';row.innerHTML=rowFields(o,row.dataset.id!=='__edit');if(row.dataset.id!=='__edit')save();if(v==='other')row.querySelector('[data-f=custom]')?.focus();return}
+ if(f==='custom')el.classList.toggle('warn',!String(v).trim());
  if(f==='guest')el.classList.toggle('warn',!v);
  row.querySelector('[data-amt]').textContent=money(amt(o));
  if(row.dataset.id!=='__edit')save();
@@ -598,9 +641,11 @@ function openEdit(id){
   <div class="btn3"><button type="button" class="pbtn" data-act="sheetSave">${t('save')}</button><button type="button" class="dbtn" data-act="sheetDel">${t('del')}</button><button type="button" data-act="sheetClose">${t('cancel')}</button></div>`;
  $('#sheet').classList.remove('hidden');
 }
-function closeSheet(){$('#sheet').classList.add('hidden');editObj=null}
+function closeSheet(){$('#sheet').classList.add('hidden');editObj=null;editK=null}
 function sheetSave(){
  const o=editObj;if(!o)return;if(!o.guest){toast(t('chooseGuest'));return}
+ if(o.itemId==='other'&&!String(o.custom||'').trim()){toast(t('needName'));return}
+ if(o.itemId!=='other')o.custom='';else o.custom=String(o.custom).trim();
  if(!(Number(o.qty)>0))return;
  const it=itemById(o.itemId);
  Object.assign(o,{qty:Number(o.qty),rate:Number(o.rate)||0,amount:amt(o),note:String(o.note||'').trim(),itemName:it?iname(it,'en'):o.itemName});
@@ -621,44 +666,228 @@ function inWords(n){
  if(cr)parts.push(three(cr%1000)+' Crore');if(lk)parts.push(two(lk)+' Lakh');if(th)parts.push(two(th)+' Thousand');if(r)parts.push(three(r));
  return 'Rupees '+(parts.join(' ')||'Zero')+(p?' and '+two(p)+' Paise':'')+' Only';
 }
-function openBill(){
- const list=filtered();if(!list.length){toast(t('noRecords'));return}
- billList=list;const groups=byGuest(list);
- let h=`<div class="paper"><div class="bh"><div>${S.settings.house?`<div class="bhouse">${safe(S.settings.house)}</div>`:''}<div class="btitle">${t('billTitle')}</div></div>
-  <div class="bmeta">${t('date')}: ${fmtDate(todayISO(),false,true)}<br>${t('period')}: ${periodText(list)}</div></div>`;
- for(const [g,rows] of groups){
-  h+=`<div class="bguest">👤 ${t('guest')}: ${safe(g)}</div><table><thead><tr><th>${t('date')}</th><th>${t('item')}</th><th class="r">${t('qty')}</th><th class="r">${t('rate')}</th><th class="r">${t('amount')}</th></tr></thead><tbody>`;
-  let last='';
-  rows.forEach(e=>{const sub=[e.slot?slotName(e.slot):'',e.note||''].filter(Boolean).map(safe).join(' · ');
-   h+=`<tr><td>${e.date!==last?fmtDate(e.date):''}</td><td>${safe(ename(e))}${sub?`<div class="bsm">${sub}</div>`:''}</td><td class="r">${num(e.qty)}</td><td class="r">${num(e.rate)}</td><td class="r">${num(e.amount)}</td></tr>`;last=e.date});
-  h+=`</tbody><tfoot><tr><td colspan="4">${t('guestTotal')}</td><td class="r">${money(sum(rows))}</td></tr></tfoot></table>`;
- }
- const sm=new Map();list.forEach(e=>{const k=ename(e);const v=sm.get(k)||{q:0,a:0};v.q+=Number(e.qty)||0;v.a+=Number(e.amount)||0;sm.set(k,v)});
- h+=`<div class="bguest">${t('summary')}</div><table><thead><tr><th>${t('item')}</th><th class="r">${t('qty')}</th><th class="r">${t('amount')}</th></tr></thead><tbody>${[...sm].map(([k,v])=>`<tr><td>${safe(k)}</td><td class="r">${num(v.q)}</td><td class="r">${num(v.a)}</td></tr>`).join('')}</tbody></table>`;
- const tot=sum(list);
- h+=`<div class="grand"><span>${t('grand')}</span><strong>${money(tot)}</strong></div><div class="words">${t('inWords')}: ${inWords(tot)}</div>
-  <div class="sign"><div>${t('preparedBy')}${S.settings.cook?`: <b>${safe(S.settings.cook)}</b>`:''}</div><div>${t('approvedBy')}</div></div></div>`;
- $('#billBody').innerHTML=h;$('#bill').classList.remove('hidden');$('#bill').scrollTop=0;
+function periodEntries(){return S.entries.filter(e=>(!rf.from||e.date>=rf.from)&&(!rf.to||e.date<=rf.to))}
+function paperHead(title,period,who){return `<div class="paper"><div class="bh"><div>${S.settings.house?`<div class="bhouse">${safe(S.settings.house)}</div>`:''}<div class="btitle">${title}</div>${who?`<div class="bwho">${who}</div>`:''}</div>
+  <div class="bmeta">${t('date')}: ${fmtDate(todayISO(),false,true)}<br>${t('period')}: ${period}</div></div>`}
+function signHtml(approve){return `<div class="sign"><div>${t('preparedBy')}${S.settings.cook?`: <b>${safe(S.settings.cook)}</b>`:''}</div>${approve?`<div>${t('approvedBy')}</div>`:''}</div>`}
+function guestTable(rows,totLabel){
+ let run=0,last='',h=`<table><thead><tr><th>${t('date')}</th><th>${t('item')}</th><th class="r">${t('amount')}</th><th class="r">${t('running')}</th></tr></thead><tbody>`;
+ [...rows].sort(cmpAsc).forEach(e=>{run=Math.round((run+(Number(e.amount)||0))*100)/100;
+  const sub=[`${num(e.qty)} × ₹${num(e.rate)}`,e.slot?slotName(e.slot):'',e.note||''].filter(Boolean).map(safe).join(' · ');
+  h+=`<tr><td>${e.date!==last?fmtDate(e.date):''}</td><td>${safe(ename(e))}<div class="bsm">${sub}</div></td><td class="r">${num(e.amount)}</td><td class="r">${num(run)}</td></tr>`;last=e.date});
+ return h+`</tbody><tfoot><tr><td colspan="2">${totLabel}</td><td class="r" colspan="2">${money(run)}</td></tr></tfoot></table>`;
 }
-function shareText(list){
- const L=[`*${t('billTitle')}*`];if(S.settings.house)L.push(S.settings.house);
- L.push(`${t('period')}: ${periodText(list)}`);
- for(const [g,rows] of byGuest(list)){
-  L.push('',`👤 *${g}*`);let last='';
-  rows.forEach(e=>{if(e.date!==last){L.push(`_${fmtDate(e.date,true)}_`);last=e.date}
-   L.push(`• ${ename(e)}${e.slot?' ('+slotName(e.slot)+')':''}: ${num(e.qty)} × ₹${num(e.rate)} = ${money(e.amount)}${e.note?' – '+e.note:''}`)});
-  L.push(`${t('guestTotal')}: *${money(sum(rows))}*`);
+function itemSummary(list){
+ const sm=new Map();list.forEach(e=>{const k=ename(e);const v=sm.get(k)||{q:0,a:0};v.q+=Number(e.qty)||0;v.a+=Number(e.amount)||0;sm.set(k,v)});
+ return `<div class="bguest">${t('summary')}</div><table><thead><tr><th>${t('item')}</th><th class="r">${t('qty')}</th><th class="r">${t('amount')}</th></tr></thead><tbody>${[...sm].map(([k,v])=>`<tr><td>${safe(k)}</td><td class="r">${num(v.q)}</td><td class="r">${num(v.a)}</td></tr>`).join('')}</tbody></table>`;
+}
+function ledgerPaper(pe){
+ const groups=byGuest(pe);let h=paperHead(t('ledgerTitle'),periodText(pe));
+ h+=`<div class="bguest">${t('guestSummary')}</div><table><thead><tr><th>${t('guest')}</th><th class="r">${t('entries')}</th><th class="r">${t('amount')}</th></tr></thead><tbody>${groups.map(([g,r])=>`<tr><td>${safe(g)}</td><td class="r">${r.length}</td><td class="r">${num(sum(r))}</td></tr>`).join('')}</tbody><tfoot><tr><td colspan="2">${t('guestCharges')}</td><td class="r">${money(sum(pe))}</td></tr></tfoot></table>`;
+ for(const [g,rows] of groups)h+=`<div class="bguest">👤 ${safe(g)}</div>`+guestTable(rows,t('guestTotal'));
+ h+=itemSummary(pe);
+ const kl=kIn(rf.from,rf.to);if(kl.length)h+=kCatTable(kl,'🛒 '+t('kitchenExp'));
+ const tot=sum(pe);
+ return h+`<div class="grand"><span>${t('guestCharges')}</span><strong>${money(tot)}</strong></div><div class="words">${t('inWords')}: ${inWords(tot)}</div>${signHtml(true)}</div>`;
+}
+function guestPaper(g,rows){
+ let h=paperHead(t('stmtTitle'),periodText(rows),`👤 ${t('guest')}: <b>${safe(g)}</b>`)+guestTable(rows,t('total'));
+ const tot=sum(rows);
+ return h+`<div class="grand"><span>${t('amountDue')}</span><strong>${money(tot)}</strong></div><div class="words">${t('inWords')}: ${inWords(tot)}</div>${signHtml(false)}</div>`;
+}
+function openBill(g){
+ if(!periodEntries().length){toast(t('noRecords'));return}
+ billMode='guest';billGuest=g||rf.guest||'all';renderBill();$('#bill').classList.remove('hidden');$('#bill').scrollTop=0;
+}
+function openKBill(from,to){
+ if(!kIn(from,to).length){toast(t('noRecords'));return}
+ billMode='kitchen';billK=[from,to];renderBill();$('#bill').classList.remove('hidden');$('#bill').scrollTop=0;
+}
+function renderBill(){
+ let chips='',h='';
+ if(billMode==='kitchen')h=kPaper(billK[0],billK[1]);
+ else{
+  const pe=periodEntries(),names=[...new Set(pe.map(e=>e.guest||'—'))].sort((a,b)=>a.localeCompare(b));
+  if(billGuest!=='all'&&!names.includes(billGuest))billGuest='all';
+  chips=`<span class="cl">${t('forWhom')}:</span>`+[['all','📒 '+t('allLedger')],...names.map(n=>[n,'👤 '+n])].map(([v,l])=>`<button type="button" class="chip ${billGuest===v?'on':''}" data-act="billFor" data-g="${safe(v)}">${safe(l)}</button>`).join('');
+  h=billGuest==='all'?ledgerPaper(pe):guestPaper(billGuest,pe.filter(e=>(e.guest||'—')===billGuest));
  }
- L.push('',`*${t('grand')}: ${money(sum(list))}*`);
- if(S.settings.cook)L.push(`${t('preparedBy')}: ${S.settings.cook}`);
+ $('#billChips').innerHTML=chips;$('#billBody').innerHTML=h;
+}
+function pushRows(L,rows){let last='';[...rows].sort(cmpAsc).forEach(e=>{if(e.date!==last){L.push(`_${fmtDate(e.date,true)}_`);last=e.date}
+ L.push(`• ${ename(e)}${e.slot?' ('+slotName(e.slot)+')':''}: ${num(e.qty)} × ₹${num(e.rate)} = ${money(e.amount)}${e.note?' – '+e.note:''}`)})}
+function guestText(g,rows){
+ const L=[`*${t('stmtTitle')}*`];if(S.settings.house)L.push(S.settings.house);
+ L.push(`👤 ${t('guest')}: *${g}*`,`${t('period')}: ${periodText(rows)}`,'');pushRows(L,rows);
+ L.push('',`*${t('amountDue')}: ${money(sum(rows))}*`);if(S.settings.cook)L.push(`${t('preparedBy')}: ${S.settings.cook}`);
  return L.join('\n');
 }
-async function doShare(list){
- if(!list.length){toast(t('noRecords'));return}
- const text=shareText(list);
- if(navigator.share){try{await navigator.share({title:t('billTitle'),text});return}catch(e){if(e.name==='AbortError')return}}
+function ledgerText(pe){
+ const L=[`*${t('ledgerTitle')}*`];if(S.settings.house)L.push(S.settings.house);L.push(`${t('period')}: ${periodText(pe)}`);
+ const groups=byGuest(pe);
+ L.push('',`*${t('guestSummary')}*`);groups.forEach(([g,r])=>L.push(`👤 ${g}: ${money(sum(r))} (${r.length})`));
+ for(const [g,rows] of groups){L.push('',`👤 *${g}*`);pushRows(L,rows);L.push(`${t('guestTotal')}: *${money(sum(rows))}*`)}
+ L.push('',`*${t('guestCharges')}: ${money(sum(pe))}*`);
+ const kl=kIn(rf.from,rf.to);
+ if(kl.length){L.push('',`🛒 *${t('kitchenExp')}*`);kCatTotals(kl).forEach(([c,v])=>L.push(`• ${c.name[lang]||c.name.en}: ${money(v)}`));L.push(`${t('total')}: *${money(sum(kl))}*`)}
+ if(S.settings.cook)L.push('',`${t('preparedBy')}: ${S.settings.cook}`);
+ return L.join('\n');
+}
+function billShareText(){
+ if(billMode==='kitchen')return kText(billK[0],billK[1]);
+ const pe=periodEntries();if(billGuest==='all')return ledgerText(pe);
+ return guestText(billGuest,pe.filter(e=>(e.guest||'—')===billGuest));
+}
+async function shareTxt(text){
+ if(!text){toast(t('noRecords'));return}
+ if(navigator.share){try{await navigator.share({text});return}catch(e){if(e.name==='AbortError')return}}
  window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank');
 }
+
+/* ================= EXTRA ITEM ================= */
+function openExtra(){
+ const g=guestNames().includes(S.settings.lastGuest)?S.settings.lastGuest:'';
+ $('#sheetBody').innerHTML=`<h2>➕ ${t('extraTitle')}</h2><div class="rf">
+  <select id="xGuest" class="${g?'':'warn'}" aria-label="${t('guest')}">${guestOptions(g)}</select>
+  <input id="xName" maxlength="40" placeholder="${t('itemName')}">
+  <div class="rf2b"><label>${t('rate')}<input id="xRate" type="number" inputmode="decimal" min="0" step="any"></label><label>${t('qty')}<input id="xQty" type="number" inputmode="decimal" min="0" step="any" value="1"></label></div>
+  <label class="chk"><input type="checkbox" id="xCard"> ${t('addToCard')}</label></div>
+  <div class="btn3 b2"><button type="button" class="pbtn" data-act="extraAdd">${t('addToList')}</button><button type="button" data-act="sheetClose">${t('cancel')}</button></div>`;
+ $('#sheet').classList.remove('hidden');setTimeout(()=>{const x=$('#xName');if(x)x.focus()},60);
+}
+function extraAdd(){
+ const g=$('#xGuest').value,n=$('#xName').value.trim().replace(/\s+/g,' '),r=Math.max(0,Number($('#xRate').value)||0),q=Number($('#xQty').value)>0?Number($('#xQty').value):1;
+ if(!g){toast(t('chooseGuest'));return}
+ if(!n){toast(t('needName'));$('#xName').focus();return}
+ let itemId='other',custom=n;
+ if($('#xCard').checked){
+  const ex=S.items.find(i=>Object.values(i.name||{}).some(v=>String(v).toLowerCase()===n.toLowerCase()));
+  if(ex){itemId=ex.id}else{itemId='i'+uid();const k=S.items.findIndex(i=>i.id==='other');S.items.splice(k<0?S.items.length:k,0,{id:itemId,icon:'🍽️',rate:r,name:{en:n,hi:n,gu:n},keys:n})}
+  custom='';
+ }
+ S.draft.push({id:uid(),date:todayISO(),guest:g,itemId,itemName:n,custom,qty:q,rate:r,slot:slotNow(),note:''});
+ S.settings.lastGuest=g;save();closeSheet();toast('+ '+n+' · '+g);renderAdd();
+}
+
+/* ================= KITCHEN EXPENSES (cook's own spending) ================= */
+const KCATS=[
+ {id:'veg',icon:'🥬',name:{en:'Vegetables',hi:'सब्ज़ी',gu:'શાકભાજી'},names:'vegetable vegetables veg sabzi sabji subzi sabjee shak shaak shakbhaji shaakbhaji bhaji tarkari',keys:'aloo alu batata pyaz pyaj kanda dungli tamatar tameta dhaniya kothmir mirchi marcha adrak aadu lehsun lasan bhindi gobi palak methi'},
+ {id:'milk',icon:'🥛',name:{en:'Milk / dairy',hi:'दूध / डेयरी',gu:'દૂધ / ડેરી'},names:'milk doodh dudh dairy',keys:'dahi curd paneer butter makkhan makhan ghee chaas chhas lassi'},
+ {id:'grocery',icon:'🛒',name:{en:'Grocery',hi:'किराना',gu:'કરિયાણું'},names:'grocery groceries kirana kiryana kariyana kariyanu kariyanun ration rashan',keys:'atta aata lot chawal chaval rice dal daal tel oil masala sugar chini cheeni khand namak mithu salt besan maida suji sooji rava patti chaipatti coffee biscuit'},
+ {id:'gas',icon:'🔥',name:{en:'Gas / fuel',hi:'गैस / ईंधन',gu:'ગેસ / બળતણ'},names:'gas gais cylinder silinder sylinder',keys:'lakdi coal koyla kerosene'},
+ {id:'fruit',icon:'🍎',name:{en:'Fruits',hi:'फल',gu:'ફળ'},names:'fruit fruits fal phal',keys:'kela banana seb safarjan apple santra orange papita papaya angoor draksh grapes'},
+ {id:'other',icon:'🧾',name:{en:'Other',hi:'अन्य',gu:'અન્ય'},names:'other anya',keys:''}
+];
+const kcat=id=>KCATS.find(c=>c.id===id)||KCATS[KCATS.length-1];
+const kname=id=>{const c=kcat(id);return c.name[lang]||c.name.en};
+const KSTOP=new Set('rupaye rupiye rupees rupee rs rupiya rupya rupaya rupiyaa kharcha kharch kharchi liya liye lia laya laye laaya lavya lidhu lidha lidho kharidi kharida kharido kharidya diya diye do mate no nu ni na thi and aur ane or'.split(' '));
+let KLEX=null;
+function kLex(){
+ if(KLEX)return KLEX;const m=new Map(),names=new Set();
+ for(const c of KCATS){(c.names+' '+c.keys).split(/\s+/).filter(Boolean).forEach(w=>{const k=skel(w);if(k&&!m.has(k))m.set(k,c.id)});c.names.split(/\s+/).forEach(w=>names.add(skel(w)))}
+ return KLEX={m,names};
+}
+function parseExp(text){
+ const L=kLex(),out=[];let off=0,buf=[],pend=null;
+ const flush=(words,amount)=>{let cat='other',all=true;for(const x of words){const k=skel(x.w),c=L.m.get(k);if(c&&cat==='other')cat=c;if(!(c&&L.names.has(k)))all=false}
+  out.push({cat,desc:all?'':words.map(x=>x.o).join(' '),amount})};
+ const raw=String(text).replace(/(\d),(\d{3})/g,'$1$2').replace(/(\d+(\.\d+)?)/g,' $1 ').split(/[\s,;।|]+/);
+ for(const o of raw){
+  if(!o)continue;
+  const w=translit(o).toLowerCase().replace(/[^a-z0-9.]/g,'').replace(/^\.+|\.+$/g,'');if(!w)continue;
+  if(/^\d+(\.\d+)?$/.test(w)){const n=Number(w);if(pend!=null&&buf.length){flush(buf,pend);buf=[];pend=n}else if(buf.length){flush(buf,n);buf=[]}else pend=n;continue}
+  const d=DATEW.find(([ws])=>ws.split(' ').some(x=>skel(x)===skel(w)));if(d){off=d[1];continue}
+  if(STOP.has(w)||KSTOP.has(w)||CONJ.has(w))continue;
+  buf.push({o:o.replace(/[“”"'.!?]/g,''),w});
+ }
+ if(pend!=null&&buf.length)flush(buf,pend);
+ return {date:addDays(todayISO(),off),items:out.filter(x=>x.amount>0)};
+}
+function weekStart(iso){const d=new Date(iso+'T00:00:00');d.setDate(d.getDate()-((d.getDay()+6)%7));return isoOf(d)}
+function kRangeDates(r){const td=todayISO();if(r==='week')return[weekStart(td),td];if(r==='month')return[td.slice(0,8)+'01',td];
+ if(r==='last'){const d=new Date(td.slice(0,8)+'01T00:00:00');d.setDate(0);const e=isoOf(d);return[e.slice(0,8)+'01',e]}return['','']}
+const kIn=(from,to)=>S.expenses.filter(x=>(!from||x.date>=from)&&(!to||x.date<=to));
+const kAsc=(a,b)=>a.date.localeCompare(b.date)||((a.created||0)-(b.created||0));
+function kPeriod(list,from,to){const ds=list.map(x=>x.date).sort();const a=from||ds[0],b=to||ds[ds.length-1];return a===b?fmtDate(a,false,true):`${fmtDate(a,false,true)} – ${fmtDate(b,false,true)}`}
+function kWeeks(list,desc){const w=[];let c=null;for(const x of [...list].sort(desc?(a,b)=>kAsc(b,a):kAsc)){const s=weekStart(x.date);if(!c||c.ws!==s){c={ws:s,items:[]};w.push(c)}c.items.push(x)}return w}
+function kCatTotals(list){const m=new Map();list.forEach(x=>m.set(x.cat,(m.get(x.cat)||0)+(Number(x.amount)||0)));return KCATS.filter(c=>m.has(c.id)).map(c=>[c,Math.round(m.get(c.id)*100)/100])}
+function kCatTable(list,title){return `<div class="bguest">${title}</div><table><thead><tr><th>${t('kWhat')}</th><th class="r">${t('amount')}</th></tr></thead><tbody>${kCatTotals(list).map(([c,v])=>`<tr><td>${c.icon} ${safe(c.name[lang]||c.name.en)}</td><td class="r">${num(v)}</td></tr>`).join('')}</tbody><tfoot><tr><td>${t('total')}</td><td class="r">${money(sum(list))}</td></tr></tfoot></table>`}
+function kPaper(from,to){
+ const list=kIn(from,to);let h=paperHead(t('kStmt'),kPeriod(list,from,to));
+ for(const w of kWeeks(list)){
+  const we=addDays(w.ws,6);let last='';
+  h+=`<div class="bguest">${t('week')}: ${fmtDate(w.ws)} – ${fmtDate(we)}</div><table><thead><tr><th>${t('date')}</th><th>${t('kWhat')}</th><th class="r">${t('amount')}</th></tr></thead><tbody>`;
+  w.items.forEach(x=>{h+=`<tr><td>${x.date!==last?fmtDate(x.date,true):''}</td><td>${safe(kname(x.cat))}${x.desc?`<div class="bsm">${safe(x.desc)}</div>`:''}</td><td class="r">${num(x.amount)}</td></tr>`;last=x.date});
+  h+=`</tbody><tfoot><tr><td colspan="2">${t('weekTotal')}</td><td class="r">${money(sum(w.items))}</td></tr></tfoot></table>`;
+ }
+ h+=kCatTable(list,t('summary'));const tot=sum(list);
+ return h+`<div class="grand"><span>${t('grand')}</span><strong>${money(tot)}</strong></div><div class="words">${t('inWords')}: ${inWords(tot)}</div>${signHtml(true)}</div>`;
+}
+function kText(from,to){
+ const list=kIn(from,to);const L=[`*${t('kStmt')}*`];if(S.settings.house)L.push(S.settings.house);L.push(`${t('period')}: ${kPeriod(list,from,to)}`);
+ for(const w of kWeeks(list)){L.push('',`*${t('week')}: ${fmtDate(w.ws)} – ${fmtDate(addDays(w.ws,6))}*`);
+  w.items.forEach(x=>L.push(`• ${fmtDate(x.date,true)} – ${kname(x.cat)}${x.desc?' ('+x.desc+')':''}: ${money(x.amount)}`));L.push(`${t('weekTotal')}: *${money(sum(w.items))}*`)}
+ L.push('',`*${t('grand')}: ${money(sum(list))}*`);if(S.settings.cook)L.push(`${t('preparedBy')}: ${S.settings.cook}`);
+ return L.join('\n');
+}
+function renderKharcha(){
+ const keep=$('#ktext')?$('#ktext').value:'';
+ const td=todayISO(),ws=weekStart(td),[from,to]=kRangeDates(kRange);
+ const list=kIn(from,to),weeks=kWeeks(list,true);
+ $('#pageKharcha').innerHTML=`
+ <div class="stats"><div class="stat"><small>${t('thisWeek')}</small><strong>${money(sum(kIn(ws,'')))}</strong></div><div class="stat"><small>${t('thisMonth')}</small><strong>${money(sum(kIn(td.slice(0,8)+'01','')))}</strong></div></div>
+ <section class="panel voice"><h2>💰 ${t('kTitle')}</h2>
+  <div class="chips center">${VLANGS.map(([v,n])=>`<button type="button" class="chip ${S.settings.voiceLang===v?'on':''}" data-act="vlang" data-v="${v}">${n}</button>`).join('')}</div>
+  ${SR?`<button type="button" class="mic kmic ${listening&&page==='kharcha'?'live':''}" data-act="kmic" aria-label="${t('mic')}">🎤</button>`:''}
+  <div class="status" id="kstatus">${safe(kstatus||(SR?t('mic'):t('noVoice')))}</div>
+  <div class="vrow"><textarea id="ktext" rows="2" placeholder="${t('kSpeakPh')}"></textarea><button type="button" data-act="kParse">${t('understand')}</button></div>
+  <div class="hint">${t('kHint')}</div>
+ </section>
+ <section class="panel"><h2>✍️ ${t('kAdd')}</h2>
+  <div class="kcats">${KCATS.map(c=>`<button type="button" class="chip ${c.id===kCat?'on':''}" data-act="kCat" data-c="${c.id}">${c.icon} ${safe(c.name[lang]||c.name.en)}</button>`).join('')}</div>
+  <div class="kform"><input id="kDesc" maxlength="80" placeholder="${t('kDesc')}"><input id="kAmt" type="number" inputmode="decimal" min="0" step="any" placeholder="${t('kAmount')}"><input id="kDate" type="date" value="${td}"></div>
+  <button type="button" class="primary" data-act="kAdd">+ ${t('kAdd')}</button>
+ </section>
+ <section class="panel" id="kList"><h2>📅 ${t('kWeekly')}</h2>
+  <div class="chips">${[['week','thisWeek'],['month','thisMonth'],['last','lastMonth'],['all','allDates']].map(([r,k])=>`<button type="button" class="chip ${kRange===r?'on':''}" data-act="kRange" data-r="${r}">${t(k)}</button>`).join('')}</div>
+  <div class="total"><span>${t('total')} (${list.length})</span><strong>${money(sum(list))}</strong></div>
+  ${list.length?`<div class="btn3 b2"><button type="button" class="pbtn" data-act="kStmt" data-from="${from}" data-to="${to}">${t('bill')}</button><button type="button" data-act="kShare" data-from="${from}" data-to="${to}">${t('shareW')}</button></div>`:''}
+  ${weeks.length?weeks.map(w=>{const we=addDays(w.ws,6);return `<div class="wk"><div class="wkh"><span>${t('week')}: ${fmtDate(w.ws)} – ${fmtDate(we)}</span><b>${money(sum(w.items))}</b></div>
+   ${w.items.map(x=>`<div class="ent" data-act="kEdit" data-id="${safe(x.id)}"><div><div class="n">${kcat(x.cat).icon} ${safe(kname(x.cat))}${x.desc?` <span class="pill">${safe(x.desc)}</span>`:''}</div><div class="m">${fmtDate(x.date,true)}</div></div><div class="a">${money(x.amount)}</div></div>`).join('')}
+   <div class="wkb"><button type="button" data-act="kStmt" data-from="${w.ws}" data-to="${we}">🧾 ${t('weekStmt')}</button><button type="button" data-act="kShare" data-from="${w.ws}" data-to="${we}" aria-label="${t('shareW')}">📤</button></div></div>`}).join(''):`<div class="empty">${t('kEmpty')}</div>`}
+ </section>`;
+ $('#ktext').value=keep;
+}
+function handleKText(txt){
+ const r=parseExp(txt);
+ if(!r.items.length){kstatus=`${t('heard')}: “${txt}” — ${t('kNone')}`;renderKharcha();return}
+ const now=Date.now();r.items.forEach((x,i)=>S.expenses.push({id:uid(),date:r.date,cat:x.cat,desc:x.desc,amount:Math.round(x.amount*100)/100,created:now+i}));
+ const [f]=kRangeDates(kRange);if(f&&r.date<f)kRange='all';
+ save();kstatus=`${t('heard')}: “${txt}” → ${t('kAdded',{n:r.items.length})}`;renderKharcha();
+ setTimeout(()=>{const p=$('#kList');if(p)p.scrollIntoView({behavior:'smooth',block:'start'})},60);
+}
+function kAddForm(){
+ const a=Number($('#kAmt').value);if(!(a>0)){toast(t('kNeedAmt'));$('#kAmt').focus();return}
+ const d=$('#kDate').value||todayISO();
+ S.expenses.push({id:uid(),date:d,cat:kCat,desc:$('#kDesc').value.trim(),amount:Math.round(a*100)/100,created:Date.now()});
+ const [f]=kRangeDates(kRange);if(f&&d<f)kRange='all';
+ save();toast(t('saved'));renderKharcha();
+}
+function openKEdit(id){
+ const x=S.expenses.find(e=>e.id===id);if(!x)return;editK=clone(x);
+ $('#sheetBody').innerHTML=`<h2>✎ ${t('kEdit')}</h2><div class="rf">
+  <select id="keCat">${KCATS.map(c=>`<option value="${c.id}" ${c.id===x.cat?'selected':''}>${c.icon} ${safe(c.name[lang]||c.name.en)}</option>`).join('')}</select>
+  <input id="keDesc" maxlength="80" placeholder="${t('kDesc')}" value="${safe(x.desc||'')}">
+  <div class="rf2b"><label>${t('kAmount')}<input id="keAmt" type="number" inputmode="decimal" min="0" step="any" value="${safe(x.amount)}"></label><label>${t('date')}<input id="keDate" type="date" value="${safe(x.date)}"></label></div></div>
+  <div class="btn3"><button type="button" class="pbtn" data-act="keSave">${t('save')}</button><button type="button" class="dbtn" data-act="keDel">${t('del')}</button><button type="button" data-act="sheetClose">${t('cancel')}</button></div>`;
+ $('#sheet').classList.remove('hidden');
+}
+function keSave(){
+ if(!editK)return;const a=Number($('#keAmt').value);if(!(a>0)){toast(t('kNeedAmt'));return}
+ Object.assign(editK,{cat:$('#keCat').value,desc:$('#keDesc').value.trim(),amount:Math.round(a*100)/100,date:$('#keDate').value||editK.date});
+ S.expenses=S.expenses.map(x=>x.id===editK.id?editK:x);save();closeSheet();toast(t('saved'));renderKharcha();
+}
+
 function download(name,content,type){const blob=new Blob([content],{type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500)}
 function exportCSV(){
  const list=filtered().sort(cmpAsc);if(!list.length){toast(t('noRecords'));return}
@@ -681,21 +910,23 @@ function doRestore(file){
 }
 
 /* ================= VOICE ================= */
-function startVoice(){
+function startVoice(cfg){
  if(!SR){toast(t('noVoice'));return}
- if(!window.isSecureContext){vstatus=t('needLink');$('#vstatus').textContent=vstatus;return}
+ if(!window.isSecureContext){cfg.status(t('needLink'));return}
  if(listening&&rec){rec.stop();return}
  try{rec=new SR()}catch(e){toast(t('noVoice'));return}
  rec.lang=S.settings.voiceLang;rec.interimResults=true;rec.continuous=false;rec.maxAlternatives=1;
- let finalText='';const box=$('#vtext');const base=box?box.value.trim():'';
- rec.onstart=()=>{listening=true;vstatus='';const m=document.querySelector('.mic');if(m)m.classList.add('live');$('#vstatus').textContent=t('listening')};
- rec.onresult=ev=>{let interim='';for(let i=ev.resultIndex;i<ev.results.length;i++){const x=ev.results[i];if(x.isFinal)finalText+=x[0].transcript+' ';else interim+=x[0].transcript}const b=$('#vtext');if(b)b.value=(base+' '+finalText+interim).trim()};
- rec.onerror=ev=>{if(ev.error==='not-allowed'||ev.error==='service-not-allowed')vstatus=window.isSecureContext?t('voiceDenied'):t('needLink');else if(ev.error==='network')vstatus=t('voiceNet');else if(ev.error!=='no-speech'&&ev.error!=='aborted')vstatus=ev.error;$('#vstatus').textContent=vstatus};
- rec.onend=()=>{listening=false;const m=document.querySelector('.mic');if(m)m.classList.remove('live');
-  const b=$('#vtext');const txt=b?b.value.trim():'';
-  if(finalText.trim()&&txt){b.value='';handleText(txt)}else if(!vstatus)$('#vstatus').textContent=t('mic')};
+ let finalText='',err=false;const box=$(cfg.box);const base=box?box.value.trim():'';
+ rec.onstart=()=>{listening=true;const m=$(cfg.btn);if(m)m.classList.add('live');cfg.status(t('listening'))};
+ rec.onresult=ev=>{let interim='';for(let i=ev.resultIndex;i<ev.results.length;i++){const x=ev.results[i];if(x.isFinal)finalText+=x[0].transcript+' ';else interim+=x[0].transcript}const b=$(cfg.box);if(b)b.value=(base+' '+finalText+interim).trim()};
+ rec.onerror=ev=>{let m='';if(ev.error==='not-allowed'||ev.error==='service-not-allowed')m=window.isSecureContext?t('voiceDenied'):t('needLink');else if(ev.error==='network')m=t('voiceNet');else if(ev.error!=='no-speech'&&ev.error!=='aborted')m=ev.error;if(m){err=true;cfg.status(m)}};
+ rec.onend=()=>{listening=false;const m=$(cfg.btn);if(m)m.classList.remove('live');
+  const b=$(cfg.box);const txt=b?b.value.trim():'';
+  if(finalText.trim()&&txt){b.value='';cfg.done(txt)}else if(!err)cfg.status(t('mic'))};
  try{rec.start()}catch(e){listening=false}
 }
+const VOICE_ADD={box:'#vtext',btn:'#pageAdd .mic',status:m=>{vstatus=m;const el=$('#vstatus');if(el)el.textContent=m},done:txt=>handleText(txt)};
+const VOICE_K={box:'#ktext',btn:'#pageKharcha .mic',status:m=>{kstatus=m;const el=$('#kstatus');if(el)el.textContent=m},done:txt=>handleKText(txt)};
 
 /* ================= EVENTS ================= */
 document.addEventListener('click',e=>{
@@ -706,12 +937,15 @@ document.addEventListener('click',e=>{
   case 'nav':showPage(b.dataset.p);break;
   case 'lang':{const i=LANGS.findIndex(x=>x[0]===lang);setLang(LANGS[(i+1)%LANGS.length][0]);break}
   case 'setLang':setLang(b.dataset.l);break;
-  case 'vlang':S.settings.voiceLang=b.dataset.v;save();renderAdd();break;
-  case 'mic':startVoice();break;
+  case 'vlang':S.settings.voiceLang=b.dataset.v;save();renderPage();break;
+  case 'mic':startVoice(VOICE_ADD);break;
+  case 'kmic':startVoice(VOICE_K);break;
   case 'parseText':{const box=$('#vtext');const txt=box.value.trim();if(txt){box.value='';handleText(txt)}break}
   case 'pickGuest':S.settings.lastGuest=b.dataset.name;save();renderAdd();break;
   case 'quickGuest':{const n=prompt(t('guestPh'));const nm=addGuest(n);if(nm){S.settings.lastGuest=nm;save();renderAdd()}break}
   case 'tile':addTile(b.dataset.id);break;
+  case 'extra':if(!S.guests.length){toast(t('noGuests'));return}openExtra();break;
+  case 'extraAdd':extraAdd();break;
   case 'ddel':{const o=rowObj(b);S.draft=S.draft.filter(x=>x!==o);save();renderAdd();break}
   case 'minus':case 'plus':{const o=rowObj(b);if(!o)return;let q=Number(o.qty)||0;q=a==='plus'?q+1:Math.max(1,q-1);o.qty=q;const row=b.closest('.drow');row.querySelector('[data-f=qty]').value=q;row.querySelector('[data-amt]').textContent=money(amt(o));if(row.dataset.id!=='__edit')save();break}
   case 'saveAll':saveAll();break;
@@ -721,11 +955,13 @@ document.addEventListener('click',e=>{
   case 'sheetDel':if(editObj&&confirm(t('confirmDel'))){S.entries=S.entries.filter(x=>x.id!==editObj.id);save();closeSheet();renderRecords()}break;
   case 'sheetClose':closeSheet();break;
   case 'preset':{const td=todayISO();const p=b.dataset.p;if(p==='today'){rf.from=rf.to=td}else if(p==='month'){rf.from=td.slice(0,8)+'01';rf.to=td}else{rf.from=rf.to=''}renderRecords();break}
-  case 'bill':openBill();break;
-  case 'share':doShare(filtered());break;
+  case 'bill':openBill(rf.guest);break;
+  case 'guestBill':openBill(b.dataset.g);break;
+  case 'billFor':billGuest=b.dataset.g;renderBill();$('#bill').scrollTop=0;break;
+  case 'share':{const pe=periodEntries();if(rf.guest==='all'){if(!pe.length){toast(t('noRecords'));return}shareTxt(ledgerText(pe))}else{const r=filtered();if(!r.length){toast(t('noRecords'));return}shareTxt(guestText(rf.guest,r))}break}
   case 'csv':exportCSV();break;
   case 'billPrint':window.print();break;
-  case 'billShare':doShare(billList);break;
+  case 'billShare':shareTxt(billShareText());break;
   case 'billClose':$('#bill').classList.add('hidden');break;
   case 'gadd':{const el=$('#newGuest');if(addGuest(el.value)){el.value='';renderSettings()}break}
   case 'gdel':{const id=b.closest('[data-gid]').dataset.gid;const g=S.guests.find(x=>x.id===id);if(g&&confirm(t('removeGuest'))){S.guests=S.guests.filter(x=>x!==g);if(S.settings.lastGuest===g.name)S.settings.lastGuest='';save();renderSettings()}break}
@@ -733,6 +969,15 @@ document.addEventListener('click',e=>{
   case 'idel':{const id=b.closest('[data-iid]').dataset.iid;const it=itemById(id);if(it&&confirm(t('removeItem')+'\n'+iname(it))){S.items=S.items.filter(x=>x!==it);S.draft=S.draft.filter(o=>o.itemId!==id);save();renderSettings()}break}
   case 'backup':download(`bolo-bill-backup-${todayISO()}.json`,JSON.stringify(Object.assign({},S,{exportedAt:new Date().toISOString()}),null,1),'application/json');break;
   case 'restore':$('#restoreFile').click();break;
+  case 'kParse':{const box=$('#ktext');const txt=box.value.trim();if(txt){box.value='';handleKText(txt)}break}
+  case 'kCat':kCat=b.dataset.c;document.querySelectorAll('[data-act=kCat]').forEach(x=>x.classList.toggle('on',x.dataset.c===kCat));break;
+  case 'kAdd':kAddForm();break;
+  case 'kRange':kRange=b.dataset.r;renderKharcha();break;
+  case 'kStmt':openKBill(b.dataset.from,b.dataset.to);break;
+  case 'kShare':{const f=b.dataset.from,tt=b.dataset.to;if(!kIn(f,tt).length){toast(t('noRecords'));return}shareTxt(kText(f,tt));break}
+  case 'kEdit':openKEdit(b.dataset.id);break;
+  case 'keSave':keSave();break;
+  case 'keDel':if(editK&&confirm(t('confirmDel'))){S.expenses=S.expenses.filter(x=>x.id!==editK.id);save();closeSheet();renderKharcha()}break;
  }
 });
 document.addEventListener('input',e=>{if(e.target.dataset.f)onField(e.target)});
@@ -744,11 +989,12 @@ document.addEventListener('change',e=>{
   if(k==='name'){const v=el.value.trim();if(v)it.name[lang]=v;else el.value=iname(it)}else if(k==='rate')it.rate=Math.max(0,Number(el.value)||0);else it.keys=el.value;save();return}
  if(el.dataset.s){S.settings[el.dataset.s]=el.value.trim();save();return}
  if(el.id==='restoreFile'){doRestore(el.files[0]);el.value='';return}
+ if(el.id==='xGuest'){el.classList.toggle('warn',!el.value);return}
  if(el.id==='recGuest'){rf.guest=el.value;renderRecords()}
  else if(el.id==='recFrom'){rf.from=el.value;renderRecords()}
  else if(el.id==='recTo'){rf.to=el.value;renderRecords()}
 });
-document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='newGuest'){e.preventDefault();$('[data-act=gadd]').click()}});
+document.addEventListener('keydown',e=>{if(e.key!=='Enter')return;const id=e.target.id;if(id==='newGuest'){e.preventDefault();$('[data-act=gadd]').click()}else if(id==='kAmt'||id==='kDesc'){e.preventDefault();kAddForm()}else if(id==='xName'||id==='xRate'||id==='xQty'){e.preventDefault();extraAdd()}});
 
 /* ================= START ================= */
 load();
