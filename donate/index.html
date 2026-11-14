@@ -83,6 +83,8 @@
   .sec{background:#f3e7d1}
   .del{background:#fee2e2;color:var(--bad);flex:0 0 auto !important;padding:13px 16px !important}
   .danger{width:100%;margin-top:18px;padding:12px;border-radius:12px;background:#fee2e2;color:var(--bad);font-weight:700}
+  .imp{width:100%;margin-top:18px;padding:12px;border-radius:12px;background:#f3e7d1;font-weight:700}
+  .sheet textarea{width:100%;height:38vh;padding:10px;border:1.5px solid var(--line);border-radius:12px;font:inherit;font-size:15px;background:#fffdf8;color:inherit}
   .err{color:var(--bad);font-size:13px;min-height:18px;margin-top:6px}
 
   #printArea{display:none}
@@ -170,8 +172,24 @@
       <option value="hi-IN">हिन्दी (Hindi)</option>
       <option value="en-IN">English (India)</option>
     </select>
+    <button class="imp" id="btnImport">📥 Import old entries (paste list or file)</button>
     <button class="danger" id="btnClear">Clear all entries</button>
     <div class="btns"><button class="pri" id="btnSettingsDone">Done</button></div>
+  </div>
+</div>
+
+<!-- import -->
+<div class="veil" id="veilImport">
+  <div class="sheet">
+    <h2>Import old entries</h2>
+    <div class="hint">One entry per line: amount, then full name.<br>Example: 1100 Ramesh Patel</div>
+    <textarea id="impText" placeholder="2100 Name Surname&#10;500 Name Surname"></textarea>
+    <input type="file" id="impFile" accept=".txt,.csv,text/plain,text/csv" style="margin-top:8px;font-size:14px">
+    <div class="err" id="impErr"></div>
+    <div class="btns">
+      <button type="button" class="sec" id="impCancel">Cancel</button>
+      <button type="button" class="pri" id="impGo">Import</button>
+    </div>
   </div>
 </div>
 
@@ -283,8 +301,20 @@ function parseSpeech(text){
     .map(w=>/^[a-z]/.test(w)? w.charAt(0).toUpperCase()+w.slice(1) : w).join(' ').trim();
   return {amount:amount,name:name};
 }
+function parseImport(text){
+  const items=[]; let bad=0;
+  String(text||'').split(/\r?\n/).forEach(line=>{
+    line=line.trim(); if(!line) return;
+    let amount=0, name='';
+    const m=line.match(/^["']?([\d૦-૯०-९][\d૦-૯०-९,]*)["']?[\s,;:\-]+(.+)$/u);
+    if(m){ amount=parseSpeech(m[1]).amount; name=m[2].replace(/^["'\s]+|["'\s,;]+$/g,'').replace(/\s+/g,' '); }
+    else { const p=parseSpeech(line); amount=p.amount; name=p.name; }
+    if(amount>0 && name) items.push({amount:amount,name:name}); else bad++;
+  });
+  return {items:items,bad:bad};
+}
 /* ================= END PARSER ================= */
-if(typeof module!=='undefined'){ module.exports={parseSpeech}; }
+if(typeof module!=='undefined'){ module.exports={parseSpeech,parseImport}; }
 </script>
 
 <script>
@@ -455,6 +485,30 @@ if(typeof module!=='undefined'){ module.exports={parseSpeech}; }
     if(!state.entries.length) return;
     if(!clearArmed){ clearArmed=true; $('btnClear').textContent='Tap again to delete all '+state.entries.length+' entries'; return; }
     clearArmed=false; state.entries=[]; save(); closeSettings();
+  };
+
+  /* ---------- import ---------- */
+  $('btnImport').onclick=()=>{
+    closeSettings(); $('impText').value=''; $('impFile').value=''; $('impErr').textContent='';
+    $('veilImport').classList.add('show');
+  };
+  $('impCancel').onclick=()=>$('veilImport').classList.remove('show');
+  $('impFile').onchange=ev=>{
+    const f=ev.target.files&&ev.target.files[0]; if(!f) return;
+    const r=new FileReader(); r.onload=()=>{ $('impText').value=String(r.result||'').replace(/^\ufeff/,''); }; r.readAsText(f);
+  };
+  $('impGo').onclick=()=>{
+    const res=parseImport($('impText').value);
+    if(!res.items.length){ $('impErr').textContent='No valid lines found. Use: amount, then name.'; return; }
+    const have=new Set(state.entries.map(e=>e.amount+'|'+e.name));
+    let added=0, dup=0, t=Date.now();
+    res.items.forEach((it,i)=>{
+      if(have.has(it.amount+'|'+it.name)){ dup++; return; }
+      state.entries.push({id:(t+i).toString(36)+Math.random().toString(36).slice(2,6),name:it.name,amount:it.amount,ts:t+i});
+      added++;
+    });
+    save(); render(); $('veilImport').classList.remove('show');
+    toast('Imported '+added+' entries'+(dup?', '+dup+' already present':'')+(res.bad?', '+res.bad+' lines skipped':'')+'.');
   };
 
   /* ---------- export ---------- */
