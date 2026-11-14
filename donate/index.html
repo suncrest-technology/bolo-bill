@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#b45309">
+<title>Bolo Donate</title>
+<style>
+  :root{
+    --bg:#fff8ec; --card:#ffffff; --ink:#3b2206; --muted:#8a6a42;
+    --brand:#b45309; --brand2:#f59e0b; --line:#f1dfc2; --ok:#15803d; --bad:#b91c1c;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;height:100%}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Noto Sans Gujarati","Noto Sans Devanagari",sans-serif;
+    background:var(--bg);color:var(--ink);font-size:16px}
+  button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+  input,select{font:inherit;color:inherit}
+
+  header{position:sticky;top:0;z-index:5;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;
+    box-shadow:0 2px 10px rgba(120,60,0,.25)}
+  .bar{display:flex;align-items:center;gap:8px;padding:10px 12px 6px}
+  .bar h1{font-size:19px;margin:0;font-weight:800;letter-spacing:.2px;flex:1;min-width:0}
+  .bar h1 small{display:block;font-size:12px;font-weight:500;opacity:.9;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ic{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.2);color:#fff;font-size:18px;
+    display:grid;place-items:center;flex:none}
+  .ribbon{display:flex;background:rgba(0,0,0,.18);font-variant-numeric:tabular-nums}
+  .ribbon div{flex:1;padding:7px 12px;display:flex;align-items:baseline;gap:6px;justify-content:center}
+  .ribbon div+div{border-left:1px solid rgba(255,255,255,.3)}
+  .ribbon span{font-size:12px;opacity:.9}
+  .ribbon b{font-size:18px}
+
+  main{padding:10px 10px 190px;max-width:640px;margin:0 auto}
+  .tools{display:flex;gap:8px;margin-bottom:10px}
+  .tools button{flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 6px;
+    font-weight:600;font-size:14px}
+  .tools button:active{background:#fdeccb}
+  .empty{text-align:center;color:var(--muted);padding:50px 20px;line-height:1.6}
+  .empty b{color:var(--ink)}
+  .row{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:10px 12px;margin-bottom:8px;width:100%;text-align:left}
+  .row.new{animation:flash 1.6s ease-out}
+  @keyframes flash{0%{background:#fde68a}100%{background:var(--card)}}
+  .sr{width:30px;height:30px;border-radius:50%;background:#fdeccb;color:var(--brand);font-weight:700;font-size:13px;
+    display:grid;place-items:center;flex:none}
+  .nm{flex:1;min-width:0}
+  .nm b{display:block;font-size:16px;overflow-wrap:anywhere}
+  .nm span{font-size:12px;color:var(--muted)}
+  .amt{font-weight:800;font-size:17px;color:var(--ok);white-space:nowrap;font-variant-numeric:tabular-nums}
+
+  .dock{position:fixed;left:0;right:0;bottom:0;z-index:6;padding:10px 12px calc(12px + env(safe-area-inset-bottom));
+    background:linear-gradient(to top,var(--bg) 70%,rgba(255,248,236,0));display:flex;flex-direction:column;align-items:center;gap:8px}
+  .heard{min-height:22px;max-width:600px;text-align:center;font-size:15px;color:var(--muted);padding:0 8px}
+  .heard.live{color:var(--ink);font-weight:600}
+  .dockrow{display:flex;align-items:center;gap:18px}
+  .mic{width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;
+    font-size:36px;box-shadow:0 6px 18px rgba(180,83,9,.45);display:grid;place-items:center}
+  .mic.on{background:var(--bad);animation:pulse 1.1s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(185,28,28,.5)}100%{box-shadow:0 0 0 22px rgba(185,28,28,0)}}
+  .side{width:52px;height:52px;border-radius:50%;background:var(--card);border:1px solid var(--line);font-size:22px;
+    display:grid;place-items:center;color:var(--brand);font-weight:700}
+  .lang{height:52px;min-width:52px;border-radius:26px;background:var(--card);border:1px solid var(--line);
+    padding:0 10px;font-weight:700;color:var(--brand);text-align:center}
+
+  .toast{position:fixed;left:12px;right:12px;bottom:200px;z-index:8;margin:0 auto;max-width:520px;background:#1f2937;color:#fff;
+    border-radius:12px;padding:12px 14px;display:none;align-items:center;gap:10px;box-shadow:0 6px 20px rgba(0,0,0,.3)}
+  .toast.show{display:flex}
+  .toast span{flex:1;overflow-wrap:anywhere}
+  .toast button{color:#fcd34d;font-weight:700;padding:4px 6px}
+
+  .veil{position:fixed;inset:0;z-index:10;background:rgba(40,20,0,.5);display:none;align-items:flex-end;justify-content:center}
+  .veil.show{display:flex}
+  .sheet{background:var(--card);width:100%;max-width:560px;border-radius:18px 18px 0 0;padding:16px 16px calc(18px + env(safe-area-inset-bottom));
+    max-height:92vh;overflow:auto}
+  .sheet h2{margin:0 0 10px;font-size:18px}
+  .sheet label{display:block;font-size:13px;color:var(--muted);margin:10px 0 4px;font-weight:600}
+  .sheet input,.sheet select{width:100%;padding:12px;border:1.5px solid var(--line);border-radius:12px;font-size:18px;background:#fffdf8}
+  .sheet input:focus,.sheet select:focus{outline:2px solid var(--brand2);border-color:var(--brand2)}
+  .hint{font-size:13px;color:var(--muted);background:#fdf3dc;border-radius:10px;padding:8px 10px;margin-bottom:4px;overflow-wrap:anywhere}
+  .btns{display:flex;gap:8px;margin-top:16px}
+  .btns button{flex:1;padding:13px;border-radius:12px;font-weight:700}
+  .pri{background:var(--brand);color:#fff}
+  .sec{background:#f3e7d1}
+  .del{background:#fee2e2;color:var(--bad);flex:0 0 auto !important;padding:13px 16px !important}
+  .danger{width:100%;margin-top:18px;padding:12px;border-radius:12px;background:#fee2e2;color:var(--bad);font-weight:700}
+  .err{color:var(--bad);font-size:13px;min-height:18px;margin-top:6px}
+
+  #printArea{display:none}
+  @media print{
+    body{background:#fff;color:#000}
+    body>*:not(#printArea){display:none !important}
+    #printArea{display:block;padding:0;font-size:12pt}
+    #printArea h1{font-size:18pt;margin:0 0 2pt;text-align:center}
+    #printArea p{margin:0 0 8pt;text-align:center;font-size:10pt}
+    #printArea table{width:100%;border-collapse:collapse}
+    #printArea th,#printArea td{border:1px solid #444;padding:5pt 6pt;text-align:left}
+    #printArea th{background:#eee}
+    #printArea .r{text-align:right;white-space:nowrap}
+    #printArea .c{text-align:center;width:36pt}
+    #printArea tfoot td{font-weight:700}
+    thead{display:table-header-group}
+    tr{page-break-inside:avoid}
+    @page{margin:12mm}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <h1>Bolo Donate<small id="regTitle"></small></h1>
+    <button class="ic" id="btnSettings" aria-label="Settings">⚙</button>
+  </div>
+  <div class="ribbon">
+    <div><span>Persons</span><b id="tCount">0</b></div>
+    <div><span>Total</span><b id="tSum">₹0</b></div>
+  </div>
+</header>
+
+<main>
+  <div class="tools">
+    <button id="btnExcel">📊 Excel</button>
+    <button id="btnPrint">🖨 PDF / Print</button>
+  </div>
+  <div id="list"></div>
+</main>
+
+<div class="toast" id="toast"><span id="toastMsg"></span><button id="toastUndo">UNDO</button></div>
+
+<div class="dock">
+  <div class="heard" id="heard">Tap the mic and say amount and full name</div>
+  <div class="dockrow">
+    <select class="lang" id="langQuick" aria-label="Voice language">
+      <option value="gu-IN">ગુ</option>
+      <option value="hi-IN">हि</option>
+      <option value="en-IN">EN</option>
+    </select>
+    <button class="mic" id="btnMic" aria-label="Speak">🎤</button>
+    <button class="side" id="btnAdd" aria-label="Type entry">＋</button>
+  </div>
+</div>
+
+<!-- entry form -->
+<div class="veil" id="veilEntry">
+  <form class="sheet" id="formEntry" autocomplete="off">
+    <h2 id="entryHead">New entry</h2>
+    <div class="hint" id="entryHint" hidden></div>
+    <label for="fAmount">Amount (₹)</label>
+    <input id="fAmount" inputmode="numeric" placeholder="501">
+    <label for="fName">Full name</label>
+    <input id="fName" placeholder="Name">
+    <div class="err" id="entryErr"></div>
+    <div class="btns">
+      <button type="button" class="del" id="btnDelete" hidden>🗑</button>
+      <button type="button" class="sec" id="btnCancel">Cancel</button>
+      <button type="submit" class="pri">Save</button>
+    </div>
+  </form>
+</div>
+
+<!-- settings -->
+<div class="veil" id="veilSettings">
+  <div class="sheet">
+    <h2>Settings</h2>
+    <label for="sTitle">Register title (shown on print and Excel)</label>
+    <input id="sTitle" placeholder="Donation Register">
+    <label for="sLang">Voice language</label>
+    <select id="sLang">
+      <option value="gu-IN">ગુજરાતી (Gujarati)</option>
+      <option value="hi-IN">हिन्दी (Hindi)</option>
+      <option value="en-IN">English (India)</option>
+    </select>
+    <button class="danger" id="btnClear">Clear all entries</button>
+    <div class="btns"><button class="pri" id="btnSettingsDone">Done</button></div>
+  </div>
+</div>
+
+<div id="printArea"></div>
+
+<script>
+/* ================= PARSER (speech text -> amount + name) ================= */
+function normKey(t){
+  return t.normalize('NFC').replace(/[़઼]/g,'').replace(/ँ/g,'ं').replace(/ઁ/g,'ં').toLowerCase();
+}
+function mapOf(obj){ const m={}; for(const k in obj) m[normKey(k)]=obj[k]; return m; }
+
+const NUM = mapOf({
+  // English
+  zero:0,one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10,eleven:11,twelve:12,thirteen:13,
+  fourteen:14,fifteen:15,sixteen:16,seventeen:17,eighteen:18,nineteen:19,twenty:20,thirty:30,forty:40,fifty:50,
+  sixty:60,seventy:70,eighty:80,ninety:90,
+  // Hindi
+  'एक':1,'दो':2,'तीन':3,'चार':4,'पांच':5,'छह':6,'छः':6,'छे':6,'सात':7,'आठ':8,'नौ':9,'दस':10,'ग्यारह':11,'बारह':12,
+  'पंद्रह':15,'पन्द्रह':15,'बीस':20,'इक्कीस':21,'पच्चीस':25,'तीस':30,'चालीस':40,'पचास':50,'इक्यावन':51,'साठ':60,
+  'सत्तर':70,'अस्सी':80,'नब्बे':90,'सवा':1.25,'डेढ़':1.5,'ढाई':2.5,'अढ़ाई':2.5,
+  // Gujarati
+  'એક':1,'બે':2,'ત્રણ':3,'ચાર':4,'પાંચ':5,'છ':6,'સાત':7,'આઠ':8,'નવ':9,'દસ':10,'અગિયાર':11,'બાર':12,'પંદર':15,
+  'વીસ':20,'એકવીસ':21,'પચ્ચીસ':25,'પચીસ':25,'ત્રીસ':30,'ચાલીસ':40,'પચાસ':50,'એકાવન':51,'સાઠ':60,'સિત્તેર':70,
+  'એંસી':80,'નેવું':90,'સવા':1.25,'દોઢ':1.5,'અઢી':2.5
+});
+const MULT = mapOf({
+  hundred:100,sau:100,thousand:1000,hazar:1000,hajar:1000,hazaar:1000,k:1000,lakh:100000,lakhs:100000,lac:100000,
+  lacs:100000,crore:10000000,crores:10000000,
+  'सौ':100,'हजार':1000,'लाख':100000,'करोड़':10000000,
+  'સો':100,'હજાર':1000,'લાખ':100000,'કરોડ':10000000
+});
+const SPECIAL = mapOf({'બસો':200,'બસ્સો':200});
+const CUR = new Set(['rupees','rupee','rs','rupaye','rupay','rupiya','rupya','inr','only','₹','रुपये','रुपए','रुपया','रूपये','रूपए',
+  'रुपयों','रुपय','रु','રૂપિયા','રુપિયા','રૂપીયા','રૂપિયો','રૂ','પુરા','मात्र'].map(normKey));
+const FILL = new Set(['name','naam','नाम','નામ','from','by','of','for','donation','दान','દાન','तरफ','से','के','की','का',
+  'ના','ની','નું','તરફથી','ને','को'].map(normKey));
+const GU_SO = normKey('સો');
+
+function classify(tok){
+  const core = tok.replace(/^[^\p{L}\p{M}\p{N}₹]+|[^\p{L}\p{M}\p{N}₹]+$/gu,'');
+  if(!core) return {t:'skip'};
+  if(/\d/.test(core)){
+    const v = parseFloat((core.match(/\d+(\.\d+)?/)||[''])[0]);
+    if(!isNaN(v)) return {t:'num',v:v,digit:true};
+  }
+  const k = normKey(core);
+  if(CUR.has(k)) return {t:'cur'};
+  if(k in SPECIAL) return {t:'num',v:SPECIAL[k]};
+  if(k in MULT) return {t:'mult',v:MULT[k]};
+  if(k in NUM) return {t:'num',v:NUM[k]};
+  if(k.length>GU_SO.length && k.endsWith(GU_SO)){
+    const p = k.slice(0,-GU_SO.length);
+    if(p in NUM) return {t:'num',v:NUM[p]*100};
+  }
+  if(k==='and') return {t:'and'};
+  return {t:'word',fill:FILL.has(k)};
+}
+
+function parseSpeech(text){
+  let s = String(text||'')
+    .replace(/[૦-૯]/g,d=>String(d.charCodeAt(0)-0x0AE6))
+    .replace(/[०-९]/g,d=>String(d.charCodeAt(0)-0x0966))
+    .replace(/(\d),(?=\d)/g,'$1')
+    .replace(/₹\s*/g,' ₹ ')
+    .replace(/(\d)\s*\/-/g,'$1 ');
+  const toks = s.split(/\s+/).filter(Boolean);
+  const cls = toks.map(classify);
+  const isN = c => c && (c.t==='num' || c.t==='mult');
+
+  // first run of number tokens (prefer a run that has a digit or a multiplier; else the first run)
+  const runs=[]; let i=0;
+  while(i<cls.length){
+    if(isN(cls[i])){
+      let j=i, strong=false;
+      while(j<cls.length){
+        const c=cls[j];
+        if(isN(c)){ if(c.digit||c.t==='mult'||c.v>10) strong=true; j++; }
+        else if((c.t==='and'||c.t==='cur'||c.t==='skip') && isN(cls[j+1])) j++;
+        else break;
+      }
+      runs.push({a:i,b:j,strong:strong}); i=j;
+    } else i++;
+  }
+  const run = runs.find(r=>r.strong) || runs[0];
+  let amount = 0;
+  if(run){
+    let total=0, cur=0;
+    for(let k=run.a;k<run.b;k++){
+      const c=cls[k];
+      if(c.t==='num') cur += c.v;
+      else if(c.t==='mult'){
+        if(c.v===100) cur=(cur||1)*100;
+        else { total += (cur||1)*c.v; cur=0; }
+      }
+    }
+    amount = Math.round(total+cur);
+  }
+  let words=[];
+  toks.forEach((t,k)=>{
+    if(run && k>=run.a && k<run.b) return;
+    const c=cls[k];
+    if(c.t==='cur'||c.t==='skip') return;
+    words.push({w:t.replace(/^[^\p{L}\p{M}\p{N}]+|[^\p{L}\p{M}\p{N}.]+$/gu,''),fill:c.t==='word'&&c.fill});
+  });
+  while(words.length && words[0].fill) words.shift();
+  while(words.length && words[words.length-1].fill) words.pop();
+  const name = words.map(x=>x.w).filter(Boolean)
+    .map(w=>/^[a-z]/.test(w)? w.charAt(0).toUpperCase()+w.slice(1) : w).join(' ').trim();
+  return {amount:amount,name:name};
+}
+/* ================= END PARSER ================= */
+if(typeof module!=='undefined'){ module.exports={parseSpeech}; }
+</script>
+
+<script>
+(function(){
+  if(typeof document==='undefined') return;
+  const $ = id => document.getElementById(id);
+  const KEY='boloDonate.v1';
+  let state={title:'Donation Register',lang:'gu-IN',entries:[]};
+  try{ const raw=localStorage.getItem(KEY); if(raw) state=Object.assign(state,JSON.parse(raw)); }catch(e){}
+  if(!Array.isArray(state.entries)) state.entries=[];
+  function save(){ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} }
+
+  const inr = n => '₹'+Number(n||0).toLocaleString('en-IN');
+  const esc = s => String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const when = ts => new Date(ts).toLocaleString('en-IN',{day:'2-digit',month:'short',hour:'numeric',minute:'2-digit'});
+  const whenFull = ts => new Date(ts).toLocaleString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'numeric',minute:'2-digit'});
+  const total = () => state.entries.reduce((a,e)=>a+(+e.amount||0),0);
+
+  let flashId=null;
+  function render(){
+    $('regTitle').textContent=state.title||'';
+    $('tCount').textContent=state.entries.length.toLocaleString('en-IN');
+    $('tSum').textContent=inr(total());
+    $('langQuick').value=state.lang;
+    const list=$('list');
+    if(!state.entries.length){
+      list.innerHTML='<div class="empty">No entries yet.<br>Tap 🎤 and say, for example:<br><b>“501 Ramesh Patel”</b><br><b>“પાંચસો એક રમેશભાઈ પટેલ”</b></div>';
+      return;
+    }
+    let h='';
+    for(let i=state.entries.length-1;i>=0;i--){
+      const e=state.entries[i];
+      h+='<button class="row'+(e.id===flashId?' new':'')+'" data-id="'+e.id+'">'+
+         '<span class="sr">'+(i+1)+'</span>'+
+         '<span class="nm"><b>'+esc(e.name)+'</b><span>'+esc(when(e.ts))+'</span></span>'+
+         '<span class="amt">'+inr(e.amount)+'</span></button>';
+    }
+    list.innerHTML=h; flashId=null;
+  }
+
+  /* ---------- toast ---------- */
+  let toastTimer=null, undoId=null;
+  function toast(msg,id){
+    undoId=id||null;
+    $('toastMsg').textContent=msg;
+    $('toastUndo').hidden=!id;
+    $('toast').classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer=setTimeout(()=>$('toast').classList.remove('show'),6000);
+  }
+  $('toastUndo').onclick=()=>{
+    if(undoId){ state.entries=state.entries.filter(e=>e.id!==undoId); save(); render(); }
+    $('toast').classList.remove('show');
+  };
+
+  function addEntry(name,amount){
+    const e={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),name:name,amount:amount,ts:Date.now()};
+    state.entries.push(e); save(); flashId=e.id; render();
+    window.scrollTo({top:0,behavior:'smooth'});
+    toast('✓ '+inr(amount)+' — '+name,e.id);
+  }
+
+  /* ---------- entry form ---------- */
+  let editId=null;
+  function openEntry(opts){
+    opts=opts||{};
+    editId=opts.id||null;
+    $('entryHead').textContent=editId?'Edit entry':'New entry';
+    $('fAmount').value=opts.amount?String(opts.amount):'';
+    $('fName').value=opts.name||'';
+    $('entryErr').textContent='';
+    $('btnDelete').hidden=!editId;
+    const hint=$('entryHint');
+    if(opts.heard){ hint.hidden=false; hint.textContent='Heard: “'+opts.heard+'” — please check and save.'; }
+    else hint.hidden=true;
+    $('veilEntry').classList.add('show');
+    setTimeout(()=>{ (opts.amount && !opts.name ? $('fName') : $('fAmount')).focus(); },50);
+  }
+  function closeEntry(){ $('veilEntry').classList.remove('show'); editId=null; }
+  $('btnCancel').onclick=closeEntry;
+  $('veilEntry').addEventListener('click',e=>{ if(e.target===$('veilEntry')) closeEntry(); });
+  $('formEntry').addEventListener('submit',ev=>{
+    ev.preventDefault();
+    const p=parseSpeech($('fAmount').value);
+    const amount=p.amount, name=$('fName').value.trim();
+    if(!(amount>0)){ $('entryErr').textContent='Enter the amount.'; $('fAmount').focus(); return; }
+    if(!name){ $('entryErr').textContent='Enter the name.'; $('fName').focus(); return; }
+    if(editId){
+      const e=state.entries.find(x=>x.id===editId);
+      if(e){ e.name=name; e.amount=amount; }
+      save(); closeEntry(); render();
+    } else { closeEntry(); addEntry(name,amount); }
+  });
+  let delArmed=false;
+  $('btnDelete').onclick=()=>{
+    if(!delArmed){ delArmed=true; $('btnDelete').textContent='Delete?'; setTimeout(()=>{delArmed=false;$('btnDelete').textContent='🗑';},3000); return; }
+    delArmed=false; $('btnDelete').textContent='🗑';
+    state.entries=state.entries.filter(e=>e.id!==editId); save(); closeEntry(); render();
+  };
+  $('list').addEventListener('click',ev=>{
+    const row=ev.target.closest('.row'); if(!row) return;
+    const e=state.entries.find(x=>x.id===row.dataset.id);
+    if(e) openEntry({id:e.id,name:e.name,amount:e.amount});
+  });
+  $('btnAdd').onclick=()=>openEntry();
+
+  /* ---------- voice ---------- */
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  const heard=$('heard'), mic=$('btnMic');
+  const IDLE='Tap the mic and say amount and full name';
+  let rec=null, listening=false, lastText='', gotFinal=false;
+  function setHeard(t,live){ heard.textContent=t; heard.classList.toggle('live',!!live); }
+
+  function handleText(text){
+    text=(text||'').trim();
+    if(!text){ setHeard('Did not hear anything. Tap the mic and try again.'); return; }
+    const p=parseSpeech(text);
+    if(p.amount>0 && p.name){ setHeard(IDLE); addEntry(p.name,p.amount); }
+    else { setHeard(IDLE); openEntry({amount:p.amount,name:p.name,heard:text}); }
+  }
+  function stopUI(){ listening=false; mic.classList.remove('on'); mic.textContent='🎤'; }
+
+  mic.onclick=()=>{
+    if(!SR){ setHeard('Voice typing is not supported in this browser. Use Chrome, or tap ＋ to type.'); return; }
+    if(listening){ try{rec.stop();}catch(e){} return; }
+    rec=new SR();
+    rec.lang=state.lang; rec.interimResults=true; rec.continuous=false; rec.maxAlternatives=1;
+    lastText=''; gotFinal=false;
+    rec.onresult=ev=>{
+      let t='';
+      for(let i=0;i<ev.results.length;i++){ t+=ev.results[i][0].transcript+' '; if(ev.results[i].isFinal) gotFinal=true; }
+      lastText=t.trim(); setHeard(lastText,true);
+    };
+    rec.onerror=ev=>{
+      const m={'not-allowed':'Microphone permission is blocked. Allow the mic for this page.',
+        'service-not-allowed':'Microphone permission is blocked. Allow the mic for this page.',
+        'no-speech':'Did not hear anything. Tap the mic and try again.',
+        'network':'Voice needs an internet connection. Tap ＋ to type.',
+        'audio-capture':'No microphone found.'}[ev.error];
+      if(m){ lastText=''; rec._msg=m; }
+    };
+    rec.onend=()=>{
+      stopUI();
+      if(rec._msg && !lastText){ setHeard(rec._msg); return; }
+      handleText(lastText);
+    };
+    try{ rec.start(); listening=true; mic.classList.add('on'); mic.textContent='⏹'; setHeard('Listening…',true); }
+    catch(e){ stopUI(); setHeard('Could not start the mic. Try again.'); }
+  };
+  if(!SR) setHeard('Voice is not supported in this browser. Open in Chrome, or tap ＋ to type.');
+
+  $('langQuick').onchange=e=>{ state.lang=e.target.value; save(); };
+
+  /* ---------- settings ---------- */
+  let clearArmed=false;
+  $('btnSettings').onclick=()=>{
+    $('sTitle').value=state.title||''; $('sLang').value=state.lang;
+    clearArmed=false; $('btnClear').textContent='Clear all entries';
+    $('veilSettings').classList.add('show');
+  };
+  function closeSettings(){
+    state.title=$('sTitle').value.trim()||'Donation Register'; state.lang=$('sLang').value;
+    save(); render(); $('veilSettings').classList.remove('show');
+  }
+  $('btnSettingsDone').onclick=closeSettings;
+  $('veilSettings').addEventListener('click',e=>{ if(e.target===$('veilSettings')) closeSettings(); });
+  $('btnClear').onclick=()=>{
+    if(!state.entries.length) return;
+    if(!clearArmed){ clearArmed=true; $('btnClear').textContent='Tap again to delete all '+state.entries.length+' entries'; return; }
+    clearArmed=false; state.entries=[]; save(); closeSettings();
+  };
+
+  /* ---------- export ---------- */
+  function stamp(){ const d=new Date(), p=n=>String(n).padStart(2,'0'); return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate()); }
+  function rows(){ return state.entries.map((e,i)=>[i+1,e.name,+e.amount,whenFull(e.ts)]); }
+  function loadXLSX(){
+    return new Promise((res,rej)=>{
+      if(window.XLSX) return res();
+      const s=document.createElement('script');
+      s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+      s.onload=()=>res(); s.onerror=()=>rej(); document.head.appendChild(s);
+      setTimeout(()=>{ if(!window.XLSX) rej(); },8000);
+    });
+  }
+  function downloadBlob(blob,name){
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name;
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+  }
+  $('btnExcel').onclick=async()=>{
+    if(!state.entries.length){ toast('No entries to export.'); return; }
+    const fname='BoloDonate_'+stamp();
+    try{
+      await loadXLSX();
+      const aoa=[[state.title],['Persons: '+state.entries.length+'   Total: Rs. '+total().toLocaleString('en-IN')],[],
+        ['Sr','Full Name','Amount (Rs.)','Date / Time']].concat(rows(),[['','TOTAL',total(),'']]);
+      const ws=XLSX.utils.aoa_to_sheet(aoa);
+      ws['!cols']=[{wch:6},{wch:34},{wch:14},{wch:24}];
+      ws['!merges']=[{s:{r:0,c:0},e:{r:0,c:3}},{s:{r:1,c:0},e:{r:1,c:3}}];
+      const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,'Donations');
+      XLSX.writeFile(wb,fname+'.xlsx');
+      toast('Excel file saved: '+fname+'.xlsx');
+    }catch(e){
+      // offline fallback: CSV (opens in Excel)
+      const q=v=>'"'+String(v).replace(/"/g,'""')+'"';
+      const lines=[['Sr','Full Name','Amount (Rs.)','Date / Time']].concat(rows(),[['','TOTAL',total(),'']]).map(r=>r.map(q).join(','));
+      downloadBlob(new Blob(['﻿'+lines.join('\r\n')],{type:'text/csv;charset=utf-8'}),fname+'.csv');
+      toast('No internet — saved as CSV (opens in Excel).');
+    }
+  };
+  $('btnPrint').onclick=()=>{
+    if(!state.entries.length){ toast('No entries to print.'); return; }
+    let h='<h1>'+esc(state.title)+'</h1><p>Persons: '+state.entries.length+' &nbsp;|&nbsp; Total: '+inr(total())+
+      ' &nbsp;|&nbsp; Printed: '+esc(whenFull(Date.now()))+'</p>'+
+      '<table><thead><tr><th class="c">Sr</th><th>Full Name</th><th class="r">Amount</th><th>Date / Time</th></tr></thead><tbody>';
+    state.entries.forEach((e,i)=>{
+      h+='<tr><td class="c">'+(i+1)+'</td><td>'+esc(e.name)+'</td><td class="r">'+inr(e.amount)+'</td><td>'+esc(whenFull(e.ts))+'</td></tr>';
+    });
+    h+='</tbody><tfoot><tr><td></td><td>TOTAL</td><td class="r">'+inr(total())+'</td><td></td></tr></tfoot></table>';
+    $('printArea').innerHTML=h;
+    setTimeout(()=>window.print(),50);
+  };
+
+  render();
+})();
+</script>
+</body>
+</html>
